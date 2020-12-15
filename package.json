@@ -1,0 +1,29 @@
+{
+  "name": "metar-map",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zagraves/metar-map.git"
+  },
+  "author": "Zach Graves <zagraves@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zagraves/metar-map/issues"
+  },
+  "homepage": "https://github.com/zagraves/metar-map#readme",
+  "dependencies": {
+    "axios": "^0.21.0",
+    "cheerio": "^1.0.0-rc.3",
+    "commander": "^6.2.1",
+    "mathjs": "^8.1.0",
+    "metar": "^1.0.0",
+    "node-pixel": "^0.11.0",
+    "rpi-ws281x-native": "^0.10.1",
+    "sprintf-js": "^1.1.2"
+  }
+}
