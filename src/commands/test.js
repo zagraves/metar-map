@@ -1,6 +1,5 @@
 import lights from "../services/lights";
 import airports from '../../data/airports.json';
-import leds from '../../data/leds.json';
 
 function colorwheel(pos) {
   pos = 255 - pos;
