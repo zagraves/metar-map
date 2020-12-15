@@ -1,1 +1,50 @@
-[]
+[
+  {
+    "station": "KRNT",
+    "light": 0
+  },
+  {
+    "station": "KBFI",
+    "light": 1
+  },
+  {
+    "station": "KSEA",
+    "light": 2
+  },
+  {
+    "station": "KBFI",
+    "light": 3
+  },
+  {
+    "station": "KPAE",
+    "light": 4
+  },
+  {
+    "station": "KAWO",
+    "light": 5
+  },
+  {
+    "station": "KTIW",
+    "light": 6
+  },
+  {
+    "station": "KPWT",
+    "light": 7
+  },
+  {
+    "station": "KNUW",
+    "light": 8
+  },
+  {
+    "station": "KFHR",
+    "light": 9
+  },
+  {
+    "station": "CYYJ",
+    "light": 10
+  },
+  {
+    "station": "KBLI",
+    "light": 11
+  }
+]

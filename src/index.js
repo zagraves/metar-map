@@ -31,20 +31,20 @@ function configure(handler) {
 }
 
 if (!process.argv[2]) {
-  program.help();
+  Program.help();
 }
 
 Program.command('scan')
   .description('Scan airports and set lighting according to station status')
-  .option('-t, --test', 'Perform test sequence', false)
   .action(configure(scan));
 
 Program.command('stop')
-  .description('Turn off lights')
+  .description('Turn off lights, useful before shut-down')
   .action(configure(stop));
 
 Program.command('test')
-  .description('Test light sequence for 2 seconds. Useful on start-up')
+  .description('Test light sequence for 2 seconds, useful on start-up')
+  .option('-s, --seconds [seconds]', 'Time to run test', 2)
   .action(configure(test));
 
 Program.command('station <station>')

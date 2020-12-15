@@ -1,7 +1,6 @@
 {
   "lights": {
-    "gpioPin": 18
-    "brightness": ""
+    "config": {}
   },
   "base-layer-codes": [
     "BKN",

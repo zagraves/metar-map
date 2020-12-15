@@ -21,13 +21,13 @@
   "dependencies": {
     "aewx-metar-parser": "^0.10.1",
     "axios": "^0.21.0",
+    "bluebird": "^3.7.2",
     "chalk": "^4.1.0",
     "cheerio": "^1.0.0-rc.3",
     "commander": "^6.2.1",
     "config": "^3.3.3",
     "debug": "^4.3.1",
     "mathjs": "^8.1.0",
-    "node-pixel": "^0.11.0",
     "rpi-ws281x-native": "^0.10.1",
     "sprintf-js": "^1.1.2"
   }

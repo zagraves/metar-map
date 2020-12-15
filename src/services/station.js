@@ -2,10 +2,10 @@ import Metar from '../utils/metar';
 import categories from '../utils/flight-category'
 
 export async function get(station) {
-  const { metar, decoded } = await Metar.get(station);
-  const { category, icon } = categories.get(decoded);
+  const metar = await Metar.get(station);
+  const category = categories.get(metar.decoded);
 
-  return { category, icon, metar, decoded };
+  return { ...metar, ...category };
 }
 
 export default { get };

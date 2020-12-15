@@ -6,7 +6,7 @@ WORKDIR $WORKDIR
 
 FROM gcr.io/distroless/nodejs:14
 COPY --from=build-env $WORKDIR $WORKDIR
-WORKDIR $WORKDIR
+WORKDIR /app
 
 ENV NODE_NO_WARNINGS 1
 

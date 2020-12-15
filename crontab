@@ -1,0 +1,2 @@
+*/10 6-23 * * *   docker run --rm quay.io/zagraves/metar-map:latest scan
+55 23 * * *       docker run --rm quay.io/zagraves/metar-map:latest stop

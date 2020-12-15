@@ -1,12 +1,33 @@
+import debug from 'debug';
 import ws281x from 'rpi-ws281x-native';
-import lights from '../../data/lights.json';
-
-ws281x.init(lights.length);
+import rgb from '../utils/rgb'
+import leds from '../../data/leds.json';
 
 // https://github.com/beyondscreen/node-rpi-ws281x-native
 
-export function render() {
-  const pixelData = new Uint32Array(lights.length);
+ws281x.init(leds.length);
 
-  return ws281x.render(pixelData);
+export function render(colors) {
+  const pixels = colors
+    .reduce((acc, color, index) => {
+      acc.set([rgb.toInt(...color.rgb)], index);
+
+      debug('metar:lights')(`Light #${index}: rgb(${color.rgb}) ${JSON.stringify(color.metadata)}`);
+
+      return acc;
+    }, new Uint32Array(leds.length));
+
+  debug('metar:render')(`Rendering lights: [${pixels}]`)
+
+  // I hope this wont flicker.
+  return ws281x.render(pixels);
 }
+
+export function reset() {
+  debug('metar:lights')('Resetting lights...')
+  ws281x.reset();
+}
+
+// ws281x.setBrightness
+
+export default { render, reset };
