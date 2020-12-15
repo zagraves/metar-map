@@ -1,5 +1,5 @@
 import lights from "../services/lights";
-import airports from '../../data/airports.json';
+import data from '../../data/custom.json';
 
 function colorwheel(pos) {
   pos = 255 - pos;
@@ -17,7 +17,7 @@ function colorwheel(pos) {
 
 function render(offset) {
   return () => {
-    const sequence = new Array(leds.length);
+    const sequence = new Array(data.lights.length);
 
     for (var index = 0; index < sequence.length; index++) {
       const rgb = colorwheel((offset + index) % 256);
@@ -26,7 +26,7 @@ function render(offset) {
 
     offset = (offset + 1) % 256;
 
-    lights.render(sequence, { length });
+    lights.render(length)(sequence);
   }
 }
 
