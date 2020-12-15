@@ -4,8 +4,10 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "NODE_NO_WARNINGS=1 node --experimental-modules --es-module-specifier-resolution=node src/index.js"
   },
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/zagraves/metar-map.git"
@@ -17,11 +19,14 @@
   },
   "homepage": "https://github.com/zagraves/metar-map#readme",
   "dependencies": {
+    "aewx-metar-parser": "^0.10.1",
     "axios": "^0.21.0",
+    "chalk": "^4.1.0",
     "cheerio": "^1.0.0-rc.3",
     "commander": "^6.2.1",
+    "config": "^3.3.3",
+    "debug": "^4.3.1",
     "mathjs": "^8.1.0",
-    "metar": "^1.0.0",
     "node-pixel": "^0.11.0",
     "rpi-ws281x-native": "^0.10.1",
     "sprintf-js": "^1.1.2"

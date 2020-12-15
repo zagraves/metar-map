@@ -1,1 +1,53 @@
-
+{
+  "lights": {
+    "gpioPin": 18
+    "brightness": ""
+  },
+  "base-layer-codes": [
+    "BKN",
+    "OVC",
+    "VV"
+  ],
+  "metar-source": {
+    "host": "https://www.aviationweather.gov",
+    "format": "raw"
+  },
+  "flight-categories": [
+    {
+      "category": "VFR",
+      "icon": "🟢",
+      "colors": [0, 255, 0],
+      "expression": [
+        "%1$d > 5",
+        "%2$d > 3000"
+      ]
+    },
+    {
+      "category": "MVFR",
+      "icon": "🔵",
+      "colors": [0, 0, 255],
+      "expression": [
+        "3 <= %1$d <= 5",
+        "1000 <= %2$d <= 3000"
+      ]
+    },
+    {
+      "category": "IFR",
+      "icon": "🔴",
+      "colors": [255, 0, 0],
+      "expression": [
+        "1 <= %1$d < 3",
+        "500 <= %2$d < 1000"
+      ]
+    },
+    {
+      "category": "LIFR",
+      "icon": "🟣",
+      "colors": [255, 0, 255],
+      "expression": [
+        "%1$d < 1",
+        "0 <= %2$d < 500"
+      ]
+    }
+  ]
+}
