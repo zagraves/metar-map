@@ -4,28 +4,30 @@ import rgb from '../utils/rgb'
 
 // https://github.com/beyondscreen/node-rpi-ws281x-native
 
-export function render(colors, { length }) {
+export function render(length) {
   ws281x.init(length);
-  const pixels = colors
-    .reduce((acc, color, index) => {
-      acc.set([rgb.toInt(...color.rgb)], index);
+  
+  return (colors) => {
+    const pixels = colors
+      .reduce((acc, color, index) => {
+        acc.set([rgb.toInt(...color.rgb)], index);
 
-      debug('metar:lights')(`Light #${index}: rgb(${color.rgb}) ${JSON.stringify(color.metadata)}`);
+        debug('metar:lights')(`Light #${index}: rgb(${color.rgb}) ${JSON.stringify(color.metadata)}`);
 
-      return acc;
-    }, new Uint32Array(length));
+        return acc;
+      }, new Uint32Array(length));
 
-  debug('metar:render')(`Rendering lights: [${pixels}]`)
+    debug('metar:render')(`Rendering lights: [${pixels}]`)
 
-  // I hope this wont flicker.
-  ws281x.init(length);
-  ws281x.render(pixels);
+    ws281x.init(length);
+    ws281x.render(pixels);
+  }
 }
 
-export function reset({ length }) {
+export function reset(length) {
   debug('metar:lights')('Resetting lights...')
   ws281x.init(length);
-  ws281x.reset();
+  return () => ws281x.reset();
 }
 
 // ws281x.setBrightness
