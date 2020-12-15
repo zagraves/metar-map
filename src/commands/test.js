@@ -26,7 +26,7 @@ function render(offset) {
 
     offset = (offset + 1) % 256;
 
-    render(sequence);
+    lights.render(sequence);
   }
 }
 
