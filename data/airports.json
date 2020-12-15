@@ -1,50 +1,54 @@
 [
   {
-    "station": "KRNT",
+    "station": "KHQM",
     "light": 0
   },
   {
-    "station": "KBFI",
+    "station": "KSHN",
     "light": 1
   },
   {
-    "station": "KSEA",
+    "station": "KPWT",
     "light": 2
   },
   {
-    "station": "KBFI",
+    "station": "KOLM",
     "light": 3
   },
   {
-    "station": "KPAE",
+    "station": "KGRF",
     "light": 4
   },
   {
-    "station": "KAWO",
+    "station": "KTIW",
     "light": 5
   },
   {
-    "station": "KTIW",
+    "station": "KTCM",
     "light": 6
   },
   {
-    "station": "KPWT",
+    "station": "KPLU",
     "light": 7
   },
   {
-    "station": "KNUW",
+    "station": "KSEA",
     "light": 8
   },
   {
-    "station": "KFHR",
+    "station": "KRNT",
     "light": 9
   },
   {
-    "station": "CYYJ",
+    "station": "KBFI",
     "light": 10
   },
   {
-    "station": "KBLI",
+    "station": "KPAE",
     "light": 11
+  },
+  {
+    "station": "KAWO",
+    "light": 12
   }
 ]
