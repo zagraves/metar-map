@@ -1,9 +1,9 @@
 {
-  lights: {
-    length: 20,
-    default: [211, 211, 211]
+  "lights": {
+    "length": 20,
+    "default": [211, 211, 211]
   },
-  airports: [
+  "airports": [
     {
         "station": "KHQM",
         "light": 0
