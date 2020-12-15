@@ -6,7 +6,7 @@ After=docker.service network-online.target
 [Service]
 ExecStartPre=-/usr/bin/docker pull quay.io/zagraves/metar-map:latest
 ExecStartPre=-/usr/bin/docker run --rm --privileged quay.io/zagraves/metar-map:latest test
-ExecStart=-/usr/bin/docker run --rm --privileged quay.io/zagraves/metar-map:latest scan
+ExecStart=/usr/bin/docker run --rm --privileged quay.io/zagraves/metar-map:latest scan
 ExecStop=/usr/bin/docker run --rm --privileged quay.io/zagraves/metar-map:latest stop
 
 [Install]
