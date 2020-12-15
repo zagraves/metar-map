@@ -2,12 +2,13 @@ import debug from 'debug';
 import Promise from 'bluebird';
 import stations from '../services/station';
 import lights from '../services/lights';
-import airports from '../../data/airports.json';
+import data from '../../data/custom.json';
 
 export default async function scan(command) {
-  const sequence = new Array(airports.length);
+  const sequence = new Array(data.airports.length);
+  const length = data.lights.length;
 
-  await Promise.all(airports.map(async (airport) => {
+  await Promise.all(data.airports.map(async (airport) => {
     const index = airport.light;
     const station = await stations.get(airport.station);
     const rgb = station.colors;
@@ -17,6 +18,6 @@ export default async function scan(command) {
 
     debug('metar:scan')(`Station ${station.decoded.icao}(${index}) is ${station.icon}: ${station.category}`)
 
-    lights.render(sequence, { length });
+    lights.render(length)(sequence);
   }));
 }
