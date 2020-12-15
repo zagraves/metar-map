@@ -17,6 +17,6 @@ export default async function scan(command) {
 
     debug('metar:scan')(`Station ${station.decoded.icao}(${index}) is ${station.icon}: ${station.category}`)
 
-    lights.render(sequence);
+    lights.render(sequence, { length });
   }));
 }
