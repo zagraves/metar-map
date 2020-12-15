@@ -1,0 +1,96 @@
+{
+  lights: {
+    length: 20,
+    default: [211, 211, 211]
+  },
+  airports: [
+    {
+        "station": "KHQM",
+        "light": 0
+    },
+    {
+        "station": "KSHN",
+        "light": 1
+    },
+    {
+        "station": "KPWT",
+        "light": 2
+    },
+    {
+        "station": "KOLM",
+        "light": 3
+    },
+    {
+        "station": "KGRF",
+        "light": 4
+    },
+    {
+        "station": "KTIW",
+        "light": 5
+    },
+    {
+        "station": "KTCM",
+        "light": 6
+    },
+    {
+        "station": "KPLU",
+        "light": 7
+    },
+    {
+        "station": "KSEA",
+        "light": 8
+    },
+    {
+        "station": "KRNT",
+        "light": 9
+    },
+    {
+        "station": "KBFI",
+        "light": 10
+    },
+    {
+        "station": "KPAE",
+        "light": 11
+    },
+    {
+        "station": "KAWO",
+        "light": 12
+    },
+    {
+        "station": "KBVS",
+        "light": 13
+    },
+    {
+        "station": "KBLI",
+        "light": 13
+    },
+    {
+        "station": "KORS",
+        "light": 14
+    },
+    {
+        "station": "CYYJ",
+        "light": 15
+    },
+    {
+        "station": "CYWH",
+        "light": 16
+    },
+    {
+        "station": "KFHR",
+        "light": 17
+    },
+    {
+        "station": "KNUW",
+        "light": 18
+    },
+    {
+        "station": "0S9",
+        "light": 19
+    },
+    {
+        "station": "KCLM",
+        "light": 20
+    }
+  ]
+}
