@@ -19,10 +19,16 @@ You can customize the airport data and it's respective LED light assignment in `
 * Rpi Zero W
 * Zebra Zero for Raspberry Pi Zero & Zero Wireless case - Laser Lime w/GPIO
 * Adafruit USB Micro-B Breakout Board [ADA1833] (To split the 5v input to the lights and the Pi)
-* Adafruit Accessories Quad Level-Shifter
+* Adafruit Accessories Quad Level-Shifter (74AHCT125)
 * ALITOVE WS2811 addressable leds.
 * Jumper wires
 * SD card
+
+## Wiring
+
+Something like this to safely power the Pi and the LEDs w/ 5v using a 74AHCT125 level shifter. They say don't wire the lights directly off the Pi, so...
+
+<img src="https://cdn-learn.adafruit.com/assets/assets/000/064/121/medium640/led_strips_raspi_NeoPixel_Level_Shifted_bb.jpg?1540314807" width="400">
 
 ## Usage
 
