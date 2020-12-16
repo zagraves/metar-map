@@ -5,7 +5,7 @@
 
 A work-in-progress to transform my VFR sectional chart for the Seattle area into a framed "Metar Map" using a Raspberry Pi Zero W and WS2811 LEDs.
 
-This is my student pilot chart from 2019 that has my solo cross-country, stage check, and checkride routes still plotted out. (e.g. Look for the line plotted over the Whidbey Class C.) I'll be adding LED lights under the map, inside the underlying foam board to light up the various airports in the region with their current flight category. (VFR 🟢, MVFR 🔵, IFR 🔴, LIFR 🟣) The output of this project is a Docker image that can be easily run by a RPi by scheduling a cron and/or using systemctl.
+This is my student pilot chart from 2019 that has my solo cross-country, stage check, and checkride routes still plotted out. (e.g. Look for the line plotted over the Whidbey Class C.) I'll be adding LED lights under the map, inside the underlying foam board to light up the various airports in the region with their current flight category. (VFR 🟢, MVFR 🔵, IFR 🔴, LIFR 🟣) 
 
 <img src="https://user-images.githubusercontent.com/17771/102384271-60a9bd80-3f81-11eb-8117-7f47dda3ae0f.jpg" width="600">
 
@@ -33,6 +33,22 @@ Something like this to safely power the Pi and the LEDs w/ 5v using a 74AHCT125 
 
 <img src="https://cdn-learn.adafruit.com/assets/assets/000/064/121/medium640/led_strips_raspi_NeoPixel_Level_Shifted_bb.jpg?1540314807" width="400">
 
+## Install
+
+Install dependencies
+
+```bash
+sudo apt-get install -y git jq
+```
+
+Install nodejs
+
+```
+wget https://nodejs.org/download/release/v11.15.0/node-v11.15.0-linux-armv6l.tar.gz
+tar -xzf node-v11.15.0-linux-armv6l.tar.gz
+sudo cp -r node-v11.15.0-linux-armv6l/* /usr/local/
+```
+
 ## Usage
 
 ```js
@@ -49,17 +65,17 @@ npm start -- -s 10
 
 ```sh
 # At every 10th minute past every hour from 6 through 22, scan the airports and update the lights.
-*/10 6-22 * * *   npm start scan
+*/10 6-22 * * *   cd ~/metar-map && npm start scan
 ```
 
 ```sh
 # At 22:55, turn off the lights.
-55 22 * * *       npm start stop
+55 22 * * *       cd ~/metar-map && npm start stop
 ```
 
 ```sh
 # At 02:00 on Sunday, run a software update
-0 2 * * sun       docker pull zagraves/metar-map:latest
+0 2 * * sun       cd ~/metar-map && git pull origin master
 ```
 
 ## systemctl
@@ -173,13 +189,8 @@ Now configure the Pi:
 1. Insert the SD card and connect the Pi to your computer on the *USB* connection only.
 2. Connect to Pi: `ssh pi@raspberrypi.local` (default password is: `raspberry`)
 3. Run: `sudo apt-get update && sudo apt-get upgrade`
+4. Run: `sudo apt-get install -y git nodejs npm jq`
 
-Next install Docker:
-
-1. Download docker: `curl -fsSL https://get.docker.com -o get-docker.sh`
-2. Install docker: `sudo sh get-docker.sh`
-3. Add `pi` user: `sudo usermod -aG docker pi`
-4. Confirm install: `docker version`
 
 Now, disconnect the Pi and get it wired into the frame.
 
