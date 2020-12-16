@@ -1,4 +1,4 @@
-FROM node:14.15.1 AS build-env
+FROM arm64v8/node:14.15-slim
 
 ENV WORKDIR /app
 
@@ -9,11 +9,8 @@ COPY ./src $WORKDIR/src
 COPY ./config $WORKDIR/config
 
 WORKDIR $WORKDIR
-RUN npm ci --only=production
 
-FROM arm64v8/node:14.15-slim
-COPY --from=build-env $WORKDIR $WORKDIR
-WORKDIR /app
+RUN npm ci --only=production
 
 ENV NODE_NO_WARNINGS 1
 
