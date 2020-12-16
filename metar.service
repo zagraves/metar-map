@@ -4,10 +4,10 @@ Requires=docker.service network-online.target
 After=docker.service network-online.target
 
 [Service]
-ExecStartPre=-/usr/bin/docker pull quay.io/zagraves/metar-map:latest
-ExecStartPre=-/usr/bin/docker run --rm --privileged -v /home/pi/metar-map/config.json:/app/data/custom.json quay.io/zagraves/metar-map:latest test
-ExecStart=/usr/bin/docker run --rm --privileged -v /home/pi/metar-map/config.json:/app/data/custom.json quay.io/zagraves/metar-map:latest scan
-ExecStop=/usr/bin/docker run --rm --privileged -v /home/pi/metar-map/config.json:/app/data/custom.json quay.io/zagraves/metar-map:latest stop
+ExecStartPre=-/usr/bin/docker pull zagraves/metar-map:latest
+ExecStartPre=-/usr/bin/docker run --rm --privileged -v /home/pi/metar-map/config.json:/app/data/custom.json zagraves/metar-map:latest test
+ExecStart=/usr/bin/docker run --rm --privileged -v /home/pi/metar-map/config.json:/app/data/custom.json zagraves/metar-map:latest scan
+ExecStop=/usr/bin/docker run --rm --privileged -v /home/pi/metar-map/config.json:/app/data/custom.json zagraves/metar-map:latest stop
 
 [Install]
 WantedBy=default.target
