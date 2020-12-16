@@ -5,7 +5,8 @@ COPY . $WORKDIR
 WORKDIR $WORKDIR
 
 # FROM arm64v8/node:14.15-slim
-FROM node:14.15-alpine
+# FROM node:14.15-alpine
+FROM gcr.io/distroless/nodejs:14
 COPY --from=build-env $WORKDIR $WORKDIR
 WORKDIR /app
 
