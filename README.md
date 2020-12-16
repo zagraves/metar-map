@@ -144,8 +144,8 @@ npm --silent start station krnt | jq
         0
       ],
       "expression": [
-        "%1$d > 5",
-        "%2$d > 3000"
+        "%(visibility)d > 5",
+        "%(cloud_base) > 3000"
       ]
     }
   }
