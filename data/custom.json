@@ -1,7 +1,10 @@
 {
   "lights": {
-    "length": 20,
-    "default": [211, 211, 211]
+    "length": 21,
+    "fault": {
+        "rgb": [211, 211, 211],
+        "icon": "⚪️"
+    }
   },
   "airports": [
     {

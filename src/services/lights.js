@@ -1,18 +1,17 @@
 import debug from 'debug';
 import ws281x from 'rpi-ws281x-native';
-import rgb from '../utils/rgb'
+import rgb from '../utils/rgb';
 
 // https://github.com/beyondscreen/node-rpi-ws281x-native
 
 export function render(length) {
-  ws281x.init(length);
-  
   return (colors) => {
     const pixels = colors
       .reduce((acc, color, index) => {
-        acc.set([rgb.toInt(...color.rgb)], index);
-
-        debug('metar:lights')(`Light #${index}: rgb(${color.rgb}) ${JSON.stringify(color.metadata)}`);
+        if (index < length) {
+          acc.set([rgb.toInt(...color.rgb)], index);
+          debug('metar:lights')(`Light #${index}: rgb(${color.rgb}) ${JSON.stringify(color.metadata)}`);
+        }
 
         return acc;
       }, new Uint32Array(length));
