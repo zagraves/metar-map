@@ -8,7 +8,7 @@ import { sprintf } from 'sprintf-js';
 const source = config.get('metar-source');
 
 async function get(stations) {
-  const codes = stations.map(s => s.toUpperCase());
+  const codes = stations.map(it => it.toUpperCase());
   const url = URL.resolve(source.host, sprintf(source.path, codes));
 
   // We'll scrape html, instead of using a more specific API. 
