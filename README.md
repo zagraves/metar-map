@@ -137,3 +137,10 @@ npm --silent start station krnt | jq
   }
 ]
 ```
+
+### Credits:
+
+A thank you to:
+
+* fboes for `aewx-metar-parser`, an excellent METAR parsing library for nodejs. 
+* prueker for his own metar map implementation that I drew a lot from.
