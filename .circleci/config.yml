@@ -1,1 +1,88 @@
+# Javascript Node CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+#
+version: 2
+jobs:
+  dependencies:
+    docker:
+    - image: circleci/node:14.15.1
+    working_directory: ~/repo
+    steps:
+      - checkout
 
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - cache-{{ .Environment.CACHE_VERSION }}-dependencies-{{ checksum "package-lock.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - cache-{{ .Environment.CACHE_VERSION }}-dependencies
+
+      - run: npm install
+
+      - save_cache:
+          key: cache-{{ .Environment.CACHE_VERSION }}-dependencies-{{ checksum "package-lock.json" }}
+          paths:
+          - node_modules
+
+      # run tests!
+      - run: npm test
+
+      - run:
+          name: Prune dependencies
+          command: |
+            npm prune --production
+      - save_cache:
+          key: cache-{{ .Environment.CACHE_VERSION }}-build-{{ .Environment.CIRCLE_SHA1 }}
+          paths:
+          - /home/circleci/repo
+
+  build:
+    docker:
+    - image: google/cloud-sdk
+    environment:
+      REPOSITORY: zagraves/metar-map
+    working_directory: ~/repo
+    steps:
+      - restore_cache:
+          key: cache-{{ .Environment.CACHE_VERSION }}-build-{{ .Environment.CIRCLE_SHA1 }}
+
+      - setup_remote_docker
+
+      - run:
+          name: Install dependencies
+          command: |
+            apt-get update && apt-get install -y jq
+            
+      - run:
+          name: Login to Dockerhub
+          command: |
+            echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+
+      - run:
+          name: Build project
+          command: |
+            cd /home/circleci/repo
+
+            docker build --build-arg COMMIT_REF=${CIRCLE_SHA1} \
+              --build-arg BUILD_DATE=`date -u +”%Y-%m-%dT%H:%M:%SZ”` \
+              -t ${REPOSITORY} .
+
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              docker push ${REPOSITORY}:latest
+            elif [ "${CIRCLE_BRANCH}" == "develop" ]; then
+              docker tag ${REPOSITORY}:latest ${REPOSITORY}:develop
+              docker push ${REPOSITORY}:develop
+            else
+              docker tag ${REPOSITORY}:latest ${DOCKER_REGISTRY}/${NAMESPACE}/${REPOSITORY}:${CIRCLE_BRANCH//\//-}
+              docker push ${DOCKER_REGISTRY}/${NAMESPACE}/${REPOSITORY}:${CIRCLE_BRANCH//\//-}
+            fi
+
+workflows:
+  version: 2
+  build-test-deploy:
+    jobs:
+      - dependencies
+      - build:
+          requires:
+          - dependencies
