@@ -2,7 +2,7 @@
 
 A work-in-progress to transform my VFR sectional chart for the Seattle area into a framed "Metar Map" using a Raspberry Pi Zero W and WS2811 LEDs.
 
-This is my student pilot chart from 2019 that has my XC routes still plotted out. I'll be adding LED lights under the map, inside the underlying foam board to light up the various airports in the region with their current flight category. (VFR 🟢, MVFR 🔵, IFR 🔴, LIFR 🟣) The output of this project is a Docker image that can be easily run by a RPi by scheduling a cron and/or using systemctl.
+This is my student pilot chart from 2019 that has my XC routes still plotted out. (Look for the line plotted over the Whidbey Class C) I'll be adding LED lights under the map, inside the underlying foam board to light up the various airports in the region with their current flight category. (VFR 🟢, MVFR 🔵, IFR 🔴, LIFR 🟣) The output of this project is a Docker image that can be easily run by a RPi by scheduling a cron and/or using systemctl.
 
 <img src="https://user-images.githubusercontent.com/17771/102384271-60a9bd80-3f81-11eb-8117-7f47dda3ae0f.jpg" width="500">
 
@@ -30,7 +30,7 @@ You can customize the airport data and it's respective LED light assignment in `
 docker run --rm quay.io/zagraves/metar-map:latest scan
 ```
 
-Run a 10 second test (color-cycle)
+Run a 10 second color test
 
 ```js
 docker run --rm quay.io/zagraves/metar-map:latest scan -- -s 10
@@ -50,7 +50,7 @@ docker run --rm quay.io/zagraves/metar-map:latest scan -- -s 10
 
 ## systemctl
 
-See metar.service for the systemctl config, which pulls the latest image, then runs a 2s test followed by a scan immediately after startup of the device.
+See metar.service for the systemctl config, which pulls the latest image, runs a 2s color test followed by a scan immediately after startup of the device.
 
 ## CLI
 
