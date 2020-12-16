@@ -39,7 +39,7 @@ docker run --rm zagraves/metar-map scan
 Run a 10 second color test
 
 ```js
-docker run --rm quay.io/zagraves/metar-map scan -- -s 10
+docker run --rm zagraves/metar-map scan -- -s 10
 ```
 
 ## cron
