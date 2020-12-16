@@ -1,6 +1,7 @@
-FROM arm64v8/node:14.15-slim
+FROM node:14.15.1 AS build-env
 
 ENV WORKDIR /app
+WORKDIR $WORKDIR
 
 COPY ./package.json $WORKDIR/package.json
 COPY ./package-lock.json $WORKDIR/package-lock.json
@@ -8,9 +9,11 @@ COPY ./data $WORKDIR/data
 COPY ./src $WORKDIR/src
 COPY ./config $WORKDIR/config
 
-WORKDIR $WORKDIR
-
 RUN npm ci --only=production
+
+FROM arm64v8/node:14.15-slim
+COPY --from=build-env $WORKDIR $WORKDIR
+WORKDIR /app
 
 ENV NODE_NO_WARNINGS 1
 
