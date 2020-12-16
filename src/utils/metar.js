@@ -33,13 +33,15 @@ async function get(stations) {
       if (!element.text()) return false;
 
       const metar = element.text();
-      const decoded = parser(metar);
+      const decoded = parse(metar);
 
       return { id, metar, decoded };
     })
     .filter(Boolean);
 }
 
+export function parse(metar) {
+  return parser(metar);
+}
 
-
-export default { get };
+export default { get, parse };

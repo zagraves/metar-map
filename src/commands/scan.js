@@ -1,19 +1,21 @@
 import debug from 'debug';
 import selectn from 'selectn';
+import config from 'config';
 import stations from '../services/station';
 import lights from '../services/lights';
 import data from '../../data/custom.json';
 
 export default async function scan(command) {
-  const { leds, fault } = data; 
   const metars = await stations.get(data.airports.map(it => it.station));
 
   const getMetar = id => metars.find(it => it.id === id);
   const getColor = metar => selectn('category.colors', metar);
   const getIcon = metar => selectn('category.icon', metar);
 
+  const defaultColor = getColor(config.get('fault'));
+
   const sequence = new Array(data.airports.length);
-  sequence.fill({ rgb: getColor(fault) }, 0);
+  sequence.fill({ rgb: defaultColor }, 0);
 
   data.airports.forEach((airport) => {
     const metar = getMetar(airport.station);
@@ -29,5 +31,5 @@ export default async function scan(command) {
     }
   });
 
-  return lights.render(leds.length)(sequence);
+  return lights.render(data.leds.length)(sequence);
 }

@@ -2,13 +2,6 @@
   "leds": {
     "length": 22
   },
-  "fault": {
-    "category": {
-        "name": "UNKNOWN",
-        "colors": [211, 211, 211],
-        "icon": "⚪️"
-    }
-  },
   "airports": [
     {
         "station": "KHQM",

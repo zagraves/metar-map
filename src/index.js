@@ -7,17 +7,20 @@ import scan from './commands/scan';
 import stop from './commands/stop';
 import test from './commands/test';
 import station from './commands/station';
+import parse from './commands/parse';
 
 const Program = new Command.Command('metar-map')
   .version(packageJson.version, '-v, --version')
   .arguments('<command>')
   .allowUnknownOption(false)
-  .usage(`${chalk.green('[command]')}`)
+  .usage(`${chalk.green('[command]')}`);
+
+let stdin = '';
 
 function configure(handler) {
   return async function commander(...args) {
     const cmd = args.pop();
-    const command = { ...config, ...cmd };
+    const command = { ...config, ...cmd, stdin };
     const handlerArgs = args.concat(command);
 
     const onError = (err) => {
@@ -51,4 +54,22 @@ Program.command('station <station>')
   .description('Get station weather for debugging')
   .action(configure(station));
 
-Program.parse(process.argv);
+Program.command('parse [str]')
+  .description('Parse input metar string')
+  .action(configure(parse));
+
+if (process.stdin.isTTY) {
+  Program.parse(process.argv);
+} else {
+  process.stdin.on('readable', function() {
+    let chunk = this.read();
+
+    if (chunk !== null) {
+      stdin += chunk;
+    }
+  });
+
+  process.stdin.on('end', function() {
+    Program.parse(process.argv); 
+  });
+}

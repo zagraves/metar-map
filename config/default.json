@@ -15,6 +15,13 @@
       "user-agent": ""
     }
   },
+  "fault": {
+    "category": {
+        "name": "UNKNOWN",
+        "icon": "⚪️",
+        "colors": [211, 211, 211]
+    }
+  },
   "flight-categories": [
     {
       "name": "VFR",

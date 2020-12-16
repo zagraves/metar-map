@@ -1,9 +1,9 @@
-import Metar from '../utils/metar';
+import metars from '../utils/metar';
 import categories from '../utils/flight-category'
 import station from '../commands/station';
 
 export async function get(ids) {
-  const stations = await Metar.get(ids);
+  const stations = await metars.get(ids);
 
   return stations.reduce((acc, item) => {
     const category = categories.get(item.decoded);
@@ -12,4 +12,8 @@ export async function get(ids) {
   }, []);
 }
 
-export default { get };
+export function parse(str) {
+  return metars.parse(str);
+}
+
+export default { get, parse };
