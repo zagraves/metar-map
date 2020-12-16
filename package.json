@@ -5,7 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\"",
-    "start": "NODE_NO_WARNINGS=1 node --experimental-modules --es-module-specifier-resolution=node src/index.js"
+    "start": "NODE_NO_WARNINGS=1 node --experimental-modules --es-module-specifier-resolution=node src/index.js",
+    "start-no-res": "NODE_NO_WARNINGS=1 node --experimental-modules src/index.js"
   },
   "type": "module",
   "repository": {
