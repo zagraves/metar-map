@@ -4,16 +4,17 @@ import axios from 'axios';
 import parser from 'aewx-metar-parser';
 import cheerio from 'cheerio';
 
-const host = config.get('metar-source.host');
-const format = config.get('metar-source.format');
+const source = config.get('metar-source');
 
 async function get(station) {
   const stationCode = station.toUpperCase();
-  const url = URL.resolve(host, `/metar/data?ids=${stationCode}&format=${format}&date=&hours=0`);
+  
+  const path = `/metar/data?ids=${stationCode}&format=${source.format}&date=&hours=0`;
+  const url = URL.resolve(source.host, path);
 
   const response = await axios.get(url);
   const $ = cheerio.load(response.data);
-  const metar = $('#awc_main_content code').text();
+  const metar = $(source.selector).text();
   const decoded = parser(metar);
 
   if (!metar) {
