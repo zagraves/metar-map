@@ -11,6 +11,9 @@ async function get(stations) {
   const path = `/metar/data?ids=${codes}&format=${source.format}&date=&hours=0`;
   const url = URL.resolve(source.host, path);
 
+  // We use aviationweather.gov to scrape html, instead
+  // of using the xml api. This should allow swapping the source url
+  // to anything else that might output raw METAR strings in the future.
   const response = await axios.get(url);
   const $ = cheerio.load(response.data);
 
