@@ -6,22 +6,28 @@ import cheerio from 'cheerio';
 
 const source = config.get('metar-source');
 
-async function get(station) {
-  const stationCode = station.toUpperCase();
-  
-  const path = `/metar/data?ids=${stationCode}&format=${source.format}&date=&hours=0`;
+async function get(stations) {
+  const codes = stations.map(s => s.toUpperCase());
+  const path = `/metar/data?ids=${codes}&format=${source.format}&date=&hours=0`;
   const url = URL.resolve(source.host, path);
 
   const response = await axios.get(url);
   const $ = cheerio.load(response.data);
-  const metar = $(source.selector).text();
-  const decoded = parser(metar);
 
-  if (!metar) {
-    throw new Error('Could not fetch/parse weather');
-  }
+  return codes.map((id) => {
+    const element = $(source.selector)
+      .filter((i, el) => $(el).text().match(id))
+      .first();
+      
+    if (!element.text()) return false;
 
-  return { metar, decoded };
+    const metar = element.text();
+    const decoded = parser(metar);
+
+    return { id, metar, decoded };
+  }).filter(Boolean);
 }
+
+
 
 export default { get };

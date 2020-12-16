@@ -14,7 +14,7 @@
   },
   "flight-categories": [
     {
-      "category": "VFR",
+      "name": "VFR",
       "icon": "🟢",
       "colors": [0, 255, 0],
       "expression": [
@@ -23,7 +23,7 @@
       ]
     },
     {
-      "category": "MVFR",
+      "name": "MVFR",
       "icon": "🔵",
       "colors": [0, 0, 255],
       "expression": [
@@ -32,7 +32,7 @@
       ]
     },
     {
-      "category": "IFR",
+      "name": "IFR",
       "icon": "🔴",
       "colors": [255, 0, 0],
       "expression": [
@@ -41,9 +41,9 @@
       ]
     },
     {
-      "category": "LIFR",
+      "name": "LIFR",
       "icon": "🟣",
-      "colors": [0, 125, 125],
+      "colors": [255, 0, 255],
       "expression": [
         "%1$d < 1",
         "0 <= %2$d < 500"

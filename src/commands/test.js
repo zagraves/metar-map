@@ -32,11 +32,13 @@ function render({ offset, length }) {
 
 export default function test(command, options) {
   return new Promise((resolve) => {
-    const { length } = data.lights;
+    const { length } = data.leds;
+
     const timeout = command.seconds * 1000;
     const interval = setInterval(render({ offset: 0, length}), 1000 / 30);
+
     const stop = () => clearInterval(interval);
-    const clear = () => lights.reset(data.lights.length);
+    const clear = () => lights.reset(length);
     const resetFn = [stop, clear, resolve];
 
     setTimeout(() => resetFn.map(f => f()), timeout);

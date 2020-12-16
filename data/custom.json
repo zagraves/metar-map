@@ -1,8 +1,11 @@
 {
-  "lights": {
-    "length": 21,
-    "fault": {
-        "rgb": [211, 211, 211],
+  "leds": {
+    "length": 22
+  },
+  "fault": {
+    "category": {
+        "name": "UNKNOWN",
+        "colors": [211, 211, 211],
         "icon": "⚪️"
     }
   },
@@ -65,35 +68,35 @@
     },
     {
         "station": "KBLI",
-        "light": 13
-    },
-    {
-        "station": "KORS",
         "light": 14
     },
     {
-        "station": "CYYJ",
+        "station": "KORS",
         "light": 15
     },
     {
-        "station": "CYWH",
+        "station": "CYYJ",
         "light": 16
     },
     {
-        "station": "KFHR",
+        "station": "CYWH",
         "light": 17
     },
     {
-        "station": "KNUW",
+        "station": "KFHR",
         "light": 18
     },
     {
-        "station": "0S9",
+        "station": "KNUW",
         "light": 19
     },
     {
-        "station": "KCLM",
+        "station": "K0S9",
         "light": 20
+    },
+    {
+        "station": "KCLM",
+        "light": 21
     }
   ]
 }

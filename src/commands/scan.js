@@ -1,29 +1,33 @@
 import debug from 'debug';
-import Promise from 'bluebird';
+import selectn from 'selectn';
 import stations from '../services/station';
 import lights from '../services/lights';
 import data from '../../data/custom.json';
 
 export default async function scan(command) {
-  const { length, fault } = data.lights;
+  const { leds, fault } = data; 
+  const metars = await stations.get(data.airports.map(it => it.station));
+
+  const getMetar = id => metars.find(it => it.id === id);
+  const getColor = metar => selectn('category.colors', metar);
+  const getIcon = metar => selectn('category.icon', metar);
+
   const sequence = new Array(data.airports.length);
+  sequence.fill({ rgb: getColor(fault) }, 0);
 
-  await Promise.all(data.airports.map(async (airport) => {
-    const index = airport.light;
+  data.airports.forEach((airport) => {
+    const metar = getMetar(airport.station);
 
-    try {
-      const station = await stations.get(airport.station);
-      const rgb = station.colors;
-      const metadata = { icon: station.icon };
+    if (metar) {
+      const icon = getIcon(metar);
+      const rgb = getColor(metar);
+      const metadata = { icon, name: airport.station };
 
-      debug('metar:scan')(`Station ${station.decoded.icao}(${index}) is ${station.icon}: ${station.category}`)
+      debug('metar:scan')(`Station ${airport.station}(${airport.light}) is ${metar.category.name}: ${icon}`)
 
-      sequence[index] = { rgb, metadata };
-    } catch (err) {
-      const { rgb, icon } = fault;
-      sequence[index] = { rgb, metadata: { icon } };      
+      sequence.splice(airport.light, 1, { rgb, metadata });
     }
+  });
 
-    lights.render(length)(sequence);
-  }));
+  return lights.render(leds.length)(sequence);
 }
