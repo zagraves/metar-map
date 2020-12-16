@@ -44,17 +44,17 @@ docker run --rm zagraves/metar-map scan -- -s 10
 
 ## cron
 
-```
+```sh
 # At every 10th minute past every hour from 6 through 22, scan the airports and update the lights.
 */10 6-22 * * *   docker run --rm -v /home/pi/metar-map/config.json:/app/data/custom.json zagraves/metar-map scan
 ```
 
-```
+```sh
 # At 22:55, turn off the lights.
 55 22 * * *       docker run --rm -v /home/pi/metar-map/config.json:/app/data/custom.json zagraves/metar-map stop
 ```
 
-```
+```sh
 # At 02:00 on Sunday, run a software update
 0 2 * * sun       docker pull zagraves/metar-map:latest
 ```
