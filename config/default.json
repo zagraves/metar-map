@@ -11,7 +11,7 @@
     "uri": "https://www.aviationweather.gov/metar/data?format=raw&hours=2&ids=%1$s",
     "selector": "#awc_main_content code",
     "headers": {
-      "user-agent": ""
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:83.0) Gecko/20100101 Firefox/83.0"
     }
   },
   "fault": {
