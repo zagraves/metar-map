@@ -1,3 +1,6 @@
+<img src="https://user-images.githubusercontent.com/17771/102396947-1250ea80-3f92-11eb-932d-e39cea4a68bd.png">
+
+
 # metar-map
 
 A work-in-progress to transform my VFR sectional chart for the Seattle area into a framed "Metar Map" using a Raspberry Pi Zero W and WS2811 LEDs.
