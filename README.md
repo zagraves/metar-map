@@ -33,25 +33,25 @@ Something like this to safely power the Pi and the LEDs w/ 5v using a 74AHCT125 
 ## Usage
 
 ```js
-docker run --rm quay.io/zagraves/metar-map:latest scan
+docker run --rm zagraves/metar-map scan
 ```
 
 Run a 10 second color test
 
 ```js
-docker run --rm quay.io/zagraves/metar-map:latest scan -- -s 10
+docker run --rm quay.io/zagraves/metar-map scan -- -s 10
 ```
 
 ## cron
 
 ```
 # At every 10th minute past every hour from 6 through 22, scan the airports and update the lights.
-*/10 6-22 * * *   docker run --rm -v /home/pi/metar-map/config.json:/app/data/custom.json quay.io/zagraves/metar-map:latest scan
+*/10 6-22 * * *   docker run --rm -v /home/pi/metar-map/config.json:/app/data/custom.json zagraves/metar-map scan
 ```
 
 ```
 # At 22:55, turn off the lights.
-55 22 * * *       docker run --rm -v /home/pi/metar-map/config.json:/app/data/custom.json quay.io/zagraves/metar-map:latest stop
+55 22 * * *       docker run --rm -v /home/pi/metar-map/config.json:/app/data/custom.json zagraves/metar-map stop
 ```
 
 ## systemctl
