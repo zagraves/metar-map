@@ -8,8 +8,7 @@
     "VV"
   ],
   "metar-source": {
-    "host": "https://www.aviationweather.gov",
-    "path": "/metar/data?format=raw&hours=2&ids=%1$s",
+    "uri": "https://www.aviationweather.gov/metar/data?format=raw&hours=2&ids=%1$s",
     "selector": "#awc_main_content code",
     "headers": {
       "user-agent": ""
