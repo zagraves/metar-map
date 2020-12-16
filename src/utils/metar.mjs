@@ -3,13 +3,13 @@ import URL from 'url';
 import axios from 'axios';
 import parser from 'aewx-metar-parser';
 import cheerio from 'cheerio';
-import { sprintf } from 'sprintf-js';
+import format from 'sprintf-js';
 
 const source = config.get('metar-source');
 
 async function get(stations) {
   const codes = stations.map(it => it.toUpperCase());
-  const url = URL.resolve(source.host, sprintf(source.path, codes));
+  const url = URL.resolve(source.host, format.sprintf(source.path, codes));
 
   // We'll scrape html, instead of using a more specific API. 
   // This should allow swapping the source url/path in the config

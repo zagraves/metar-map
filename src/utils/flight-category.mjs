@@ -1,6 +1,6 @@
 import config from 'config';
-import * as math from 'mathjs';
-import { sprintf } from 'sprintf-js';
+import math from 'mathjs';
+import format from 'sprintf-js';
 
 // Categories are ordered in ascending priority. 
 // All categories have math expressions that are 
@@ -10,7 +10,7 @@ const baseLayers = config.get('base-layer-codes');
 
 export function get(metar) {
   const search = (context) => 
-    (cat) => math.evaluate(cat.expression.map(exp => sprintf(exp, context))).some(Boolean);
+    (cat) => math.evaluate(cat.expression.map(exp => format.sprintf(exp, context))).some(Boolean);
 
   // Find lowest cloud bases (bkn,ovc,vv) below 12000 AGL
   const clouds = (metar.clouds || [])
