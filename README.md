@@ -4,11 +4,11 @@ A work-in-progress to transform my VFR sectional chart for the Seattle area into
 
 This is my student pilot chart from 2019 that has my XC routes still plotted out. I'll be adding LED lights under the map, inside the underlying foam board to light up the various airports in the region with their current flight category. (VFR 🟢, MVFR 🔵, IFR 🔴, LIFR 🟣) The output of this project is a Docker image that can be easily run by a RPi by scheduling a cron and/or using systemctl.
 
-![map](https://user-images.githubusercontent.com/17771/102384271-60a9bd80-3f81-11eb-8117-7f47dda3ae0f.jpg)
+<img src="https://user-images.githubusercontent.com/17771/102384271-60a9bd80-3f81-11eb-8117-7f47dda3ae0f.jpg" width="500">
 
 ## Planned layout 
 
-![layout](https://user-images.githubusercontent.com/17771/102383357-491e0500-3f80-11eb-9f66-0b21ba993016.PNG)
+<img src="https://user-images.githubusercontent.com/17771/102383357-491e0500-3f80-11eb-9f66-0b21ba993016.PNG" width="500">
 
 ## Configuration
 
