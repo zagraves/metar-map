@@ -48,11 +48,6 @@ jobs:
           key: cache-{{ .Environment.CACHE_VERSION }}-build-{{ .Environment.CIRCLE_SHA1 }}
 
       - setup_remote_docker
-
-      - run:
-          name: Install dependencies
-          command: |
-            apt-get update && apt-get install -y jq
             
       - run:
           name: Login to Dockerhub
