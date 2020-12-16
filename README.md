@@ -36,25 +36,25 @@ Something like this to safely power the Pi and the LEDs w/ 5v using a 74AHCT125 
 ## Usage
 
 ```js
-docker run --rm zagraves/metar-map scan
+npm start scan
 ```
 
 Run a 10 second color test
 
 ```js
-docker run --rm zagraves/metar-map scan -- -s 10
+npm start -- -s 10
 ```
 
 ## cron
 
 ```sh
 # At every 10th minute past every hour from 6 through 22, scan the airports and update the lights.
-*/10 6-22 * * *   docker run --rm -v /home/pi/metar-map/config.json:/app/data/custom.json zagraves/metar-map scan
+*/10 6-22 * * *   npm start scan
 ```
 
 ```sh
 # At 22:55, turn off the lights.
-55 22 * * *       docker run --rm -v /home/pi/metar-map/config.json:/app/data/custom.json zagraves/metar-map stop
+55 22 * * *       npm start stop
 ```
 
 ```sh
