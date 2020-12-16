@@ -39,7 +39,7 @@ jobs:
 
   build:
     docker:
-    - image: google/cloud-sdk
+    - image: circleci/node:14.15.1
     environment:
       REPOSITORY: zagraves/metar-map
     working_directory: ~/repo
