@@ -4,7 +4,8 @@ ENV WORKDIR /app
 COPY . $WORKDIR
 WORKDIR $WORKDIR
 
-FROM arm64v8/node:14.15-slim
+# FROM arm64v8/node:14.15-slim
+FROM node:14.15-alpine
 COPY --from=build-env $WORKDIR $WORKDIR
 WORKDIR /app
 
