@@ -9,7 +9,7 @@ const source = config.get('metar-source');
 
 async function get(stations) {
   const codes = stations.map(it => it.toUpperCase());
-  const url = URL.resolve(source.host, format.sprintf(source.path, codes));
+  const url = format.sprintf(source.uri, codes);
 
   // We'll scrape html, instead of using a more specific API. 
   // This should allow swapping the source url/path in the config
