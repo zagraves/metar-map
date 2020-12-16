@@ -9,8 +9,11 @@
   ],
   "metar-source": {
     "host": "https://www.aviationweather.gov",
-    "format": "raw",
-    "selector": "#awc_main_content code"
+    "path": "/metar/data?format=raw&hours=2&ids=$1%s",
+    "selector": "#awc_main_content code",
+    "headers": {
+      "user-agent": ""
+    }
   },
   "flight-categories": [
     {
