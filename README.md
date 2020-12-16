@@ -149,6 +149,37 @@ npm --silent start station krnt | jq
 ]
 ```
 
+## Pi Setup:
+
+1. Download Rasbian Buster lite
+2. Use balena.io/etcher to flash a compatible microSD card with the disk image. 
+3. Enable ssh (optional): `touch /Volumes/boot/ssh`
+4. Configure wi-fi (required): `vi /Volumes/boot/etc/wpa_supplicant/wpa_supplicant.conf`
+
+```
+# Add to end of file.
+network={
+    ssid="Your SSID"
+    psk="YourWPAPassword"
+    key_mgmt=WPA-PSK
+}
+```
+
+Now configure the Pi:
+
+1. Insert the SD card and connect the Pi to your computer on the *USB* connection only.
+2. Connect to Pi: `ssh pi@raspberrypi.local` (default password is: `raspberry`)
+3. Run: `sudo apt-get update && sudo apt-get upgrade`
+
+Next install Docker:
+
+1. Download docker: `curl -fsSL https://get.docker.com -o get-docker.sh`
+2. Install docker: `sudo sh get-docker.sh`
+3. Add `pi` user: `sudo usermod -aG docker pi`
+4. Confirm install: `docker version`
+
+Now, disconnect the Pi and get it wired into the frame.
+
 ### Credits:
 
 A thank you to:
