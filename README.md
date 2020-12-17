@@ -35,6 +35,12 @@ Something like this to safely power the Pi and the LEDs w/ 5v using a 74AHCT125 
 
 ## Install
 
+Update:
+
+```bash
+sudo apt-get update && sudo apt-get upgrade
+```
+
 Install dependencies
 
 ```bash
