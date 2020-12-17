@@ -55,6 +55,11 @@ tar -xzf node-v11.15.0-linux-armv6l.tar.gz
 sudo cp -r node-v11.15.0-linux-armv6l/* /usr/local/
 ```
 
+```
+git clone https://github.com/zagraves/metar-map.git
+cd metar-map && make
+```
+
 ## Usage
 
 ```js
