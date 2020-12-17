@@ -4,10 +4,11 @@ IMAGE=quay.io/zagraves/metar-map
 all: build
 
 build:
-	docker build -t $(IMAGE) .
+	npm install
 
-build-nc:
-	docker build --no-cache -t $(IMAGE) .
+install:
+	# /usr/bin/crontab ./crontab
+	echo "install"
 
-run: 
-	docker run --rm --env-file .env $(IMAGE)
+update:
+	git pull origin master
