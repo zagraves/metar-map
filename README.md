@@ -172,7 +172,7 @@ npm --silent start station krnt | jq
 
 1. Download Rasbian Buster lite
 2. Use balena.io/etcher to flash a compatible microSD card with the disk image. 
-3. Enable ssh (optional): `touch /Volumes/boot/ssh`
+3. Enable ssh: https://desertbot.io/blog/ssh-into-pi-zero-over-usb
 4. Configure wi-fi (required): `vi /Volumes/boot/etc/wpa_supplicant/wpa_supplicant.conf`
 
 ```
