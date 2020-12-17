@@ -4,6 +4,7 @@ Requires=network-online.target
 After=network-online.target
 
 [Service]
+WorkingDirectory=/home/pi/metar-map
 ExecStartPre=-/usr/bin/npm start test
 ExecStart=/usr/bin/npm start scan
 ExecStop=/usr/bin/npm start stop
