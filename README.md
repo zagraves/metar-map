@@ -35,6 +35,12 @@ Something like this to safely power the Pi and the LEDs w/ 5v using a 74AHCT125 
 
 ## Install
 
+Update:
+
+```bash
+sudo apt-get update && sudo apt-get upgrade
+```
+
 Install dependencies
 
 ```bash
@@ -47,6 +53,12 @@ Install nodejs
 wget https://nodejs.org/download/release/v11.15.0/node-v11.15.0-linux-armv6l.tar.gz
 tar -xzf node-v11.15.0-linux-armv6l.tar.gz
 sudo cp -r node-v11.15.0-linux-armv6l/* /usr/local/
+```
+
+```
+git clone https://github.com/zagraves/metar-map.git
+cd metar-map
+make && make install
 ```
 
 ## Usage
@@ -172,7 +184,7 @@ npm --silent start station krnt | jq
 
 1. Download Rasbian Buster lite
 2. Use balena.io/etcher to flash a compatible microSD card with the disk image. 
-3. Enable ssh (optional): `touch /Volumes/boot/ssh`
+3. Enable ssh: https://desertbot.io/blog/ssh-into-pi-zero-over-usb
 4. Configure wi-fi (required): `vi /Volumes/boot/etc/wpa_supplicant/wpa_supplicant.conf`
 
 ```
