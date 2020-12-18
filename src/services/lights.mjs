@@ -10,7 +10,7 @@ export function render(length) {
     const pixels = colors
       .reduce((acc, color, index) => {
         if (index < length) {
-          acc.set([rgb(...color.rgb)], index);
+          acc.set([grb(...color.rgb)], index);
           debug('metar:lights')(`Light #${index}: rgb(${color.rgb}) ${JSON.stringify(color.metadata)}`);
         }
 
