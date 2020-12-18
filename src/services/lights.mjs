@@ -10,7 +10,7 @@ export function render(length) {
     const pixels = colors
       .reduce((acc, color, index) => {
         if (index < length) {
-          acc.set([grb(...color.rgb)], index);
+          acc.set([rgb(...color.rgb)], index);
           debug('metar:lights')(`Light #${index}: rgb(${color.rgb}) ${JSON.stringify(color.metadata)}`);
         }
 
@@ -20,6 +20,7 @@ export function render(length) {
     debug('metar:render')(`Rendering lights: [${pixels}]`)
 
     ws281x.init(length);
+
     ws281x.render(pixels);
     ws281x.render(pixels);
   }
