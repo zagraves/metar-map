@@ -3,7 +3,7 @@ export function rgb(r, g, b) {
 }
 
 export function grb(r, g, b) {
-  return ((g & 0xff) << 8) ((r & 0xff) << 16) + (b & 0xff);
+  return ((g & 0xff) << 8) + ((r & 0xff) << 16) + (b & 0xff);
 }
 
 export default { rgb, grb };
