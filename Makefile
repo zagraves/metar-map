@@ -7,8 +7,7 @@ build:
 	npm install
 
 install:
-	# /usr/bin/crontab ./crontab
-	echo "install"
+	/usr/bin/crontab ./crontab
 	sudo cp metar.map.service /etc/systemd/system/metar.map.service
 	sudo systemctl enable metar.map.service
 

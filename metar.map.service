@@ -5,9 +5,9 @@ After=network-online.target
 
 [Service]
 WorkingDirectory=/home/pi/metar-map
-ExecStartPre=-/usr/bin/npm start test
-ExecStart=/usr/bin/npm start scan
-ExecStop=/usr/bin/npm start stop
+ExecStartPre=-/home/pi/metar-map/test.sh
+ExecStart=/home/pi/metar-map/start.sh
+ExecStop=/home/pi/metar-map/stop.sh
 
 [Install]
 WantedBy=default.target

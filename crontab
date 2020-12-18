@@ -1,1 +1,2 @@
-*/10 * * * *   sudo npm start scan
+*/10 * * * *  /home/pi/metar-map/start.sh
+0 3 * * sun   /home/pi/metar-map/upgrade.sh

@@ -1,0 +1,1 @@
+/usr/local/bin/npm run exec:stop
