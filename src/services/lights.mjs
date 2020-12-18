@@ -1,7 +1,7 @@
 // import Promise from 'bluebird';
 import debug from 'debug';
 import ws281x from 'rpi-ws281x-native';
-import rgb from '../utils/rgb';
+import { rgb, grb } from '../utils/rgb';
 
 // https://github.com/beyondscreen/node-rpi-ws281x-native
 
@@ -10,7 +10,7 @@ export function render(length) {
     const pixels = colors
       .reduce((acc, color, index) => {
         if (index < length) {
-          acc.set([rgb.toInt(...color.rgb)], index);
+          acc.set([grb(...color.rgb)], index);
           debug('metar:lights')(`Light #${index}: rgb(${color.rgb}) ${JSON.stringify(color.metadata)}`);
         }
 
