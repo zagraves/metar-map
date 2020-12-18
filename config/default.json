@@ -25,7 +25,7 @@
     {
       "name": "VFR",
       "icon": "🟢",
-      "colors": [90, 199, 59],
+      "colors": [0, 255, 0],
       "expression": [
         "%(visibility)d > 5",
         "%(cloud_base)d > 3000"
@@ -34,7 +34,7 @@
     {
       "name": "MVFR",
       "icon": "🔵",
-      "colors": [50, 104, 213],
+      "colors": [0, 0, 255],
       "expression": [
         "3 <= %(visibility)d <= 5",
         "1000 <= %(cloud_base)d <= 3000"
@@ -43,7 +43,7 @@
     {
       "name": "IFR",
       "icon": "🔴",
-      "colors": [234, 62, 37],
+      "colors": [255, 0, 0],
       "expression": [
         "1 <= %(visibility)d < 3",
         "500 <= %(cloud_base)d < 1000"
@@ -52,7 +52,7 @@
     {
       "name": "LIFR",
       "icon": "🟣",
-      "colors": [235, 88, 237],
+      "colors": [255, 0, 255],
       "expression": [
         "%(visibility)d < 1",
         "0 <= %(cloud_base)d < 500"

@@ -1,2 +1,3 @@
-*/10 * * * *  /home/pi/metar-map/start.sh
-0 3 * * sun   /home/pi/metar-map/upgrade.sh
+*/10 * * * *    sudo /home/pi/metar-map/start.sh
+# 55 22 * * *   sudo /home/pi/metar-map/stop.sh
+0 3 * * sun     sudo /home/pi/metar-map/upgrade.sh

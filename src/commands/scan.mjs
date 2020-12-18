@@ -17,6 +17,8 @@ export default async function scan(command) {
   const sequence = new Array(data.airports.length);
   sequence.fill({ rgb: defaultColor }, 0);
 
+  // lights.render(data.leds.length)(sequence);
+
   data.airports.forEach((airport) => {
     const metar = getMetar(airport.station);
 
