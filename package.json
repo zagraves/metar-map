@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\"",
-    "start": "NODE_NO_WARNINGS=1 node --experimental-modules src/index.mjs",
+    "start": "DEBUG=metar* NODE_NO_WARNINGS=1 node --experimental-modules src/index.mjs",
     "exec:test": "npm run start test",
     "exec:scan": "npm run start scan",
     "exec:stop": "npm run start stop"
