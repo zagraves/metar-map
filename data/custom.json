@@ -5,11 +5,11 @@
   },
   "airports": [
     {
-        "station": "KHQM",
+        "station": "CYAZ",
         "light": 0
     },
     {
-        "station": "KSHN",
+        "station": "KUIL",
         "light": 1
     },
     {
