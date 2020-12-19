@@ -30,6 +30,8 @@ export default async function scan(command) {
       debug('metar:scan')(`Station ${airport.station}(${airport.light}) is ${metar.category.name}: ${icon}`)
 
       sequence.splice(airport.light, 1, { rgb, metadata });
+    } else {
+      debug('metar:scan')(`Station ${airport.station}(${airport.light}) is missing METARs.`)
     }
   });
 
