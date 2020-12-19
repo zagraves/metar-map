@@ -1,6 +1,6 @@
 {
   "leds": {
-    "length": 22,
+    "length": 24,
     "brightness": 100
   },
   "airports": [
@@ -91,6 +91,14 @@
     {
         "station": "KCLM",
         "light": 21
+    },
+    {
+        "station": "KNOW",
+        "light": 22
+    },
+    {
+        "station": "KUIL",
+        "light": 23
     }
   ]
 }
