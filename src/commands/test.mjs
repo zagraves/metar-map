@@ -15,7 +15,11 @@ function colorwheel(pos) {
   }
 }
 
-function render({ offset, length }) {
+function render() {
+  const { length, ...options } = data.leds;
+
+  let offset = 0;
+
   return () => {
     const sequence = new Array(length);
 
@@ -26,19 +30,17 @@ function render({ offset, length }) {
 
     offset = (offset + 1) % 256;
 
-    lights.render(length)(sequence);
+    lights.render(length, options)(sequence);
   }
 }
 
 export default function test(command, options) {
   return new Promise((resolve) => {
-    const { length } = data.leds;
-
     const timeout = command.seconds * 1000;
-    const interval = setInterval(render({ offset: 0, length}), 1000 / 30);
+    const interval = setInterval(render(), 1000 / 30);
 
     const stop = () => clearInterval(interval);
-    const clear = () => lights.reset(length);
+    const clear = () => lights.reset(data.leds.length);
     const resetFn = [stop, clear, resolve];
 
     setTimeout(() => resetFn.map(f => f()), timeout);

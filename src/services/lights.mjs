@@ -5,7 +5,7 @@ import { rgb, grb } from '../utils/rgb';
 
 // https://github.com/beyondscreen/node-rpi-ws281x-native
 
-export function render(length) {
+export function render(length, options) {
   return async (colors) => {
     const pixels = colors
       .reduce((acc, color, index) => {
@@ -19,9 +19,7 @@ export function render(length) {
 
     debug('metar:render')(`Rendering lights: [${pixels}]`)
 
-    ws281x.init(length);
-
-    ws281x.render(pixels);
+    ws281x.init(length, options);
     ws281x.render(pixels);
   }
 }
