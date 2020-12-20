@@ -7,7 +7,9 @@ A work-in-progress to transform my VFR sectional chart for the Seattle area into
 
 This is my student pilot chart from 2019 that has my solo cross-country, stage check, and checkride routes still plotted out. (e.g. Look for the line plotted over the Whidbey Class C.) I'll be adding LED lights under the map, inside the underlying foam board to light up the various airports in the region with their current flight category. (VFR 🟢, MVFR 🔵, IFR 🔴, LIFR 🟣) 
 
-<img src="https://user-images.githubusercontent.com/17771/102384271-60a9bd80-3f81-11eb-8117-7f47dda3ae0f.jpg" width="600">
+<img src="https://user-images.githubusercontent.com/17771/102724746-b7d3c900-42c6-11eb-8ee6-9a5205647d74.JPG" width="600">
+
+<img src="https://user-images.githubusercontent.com/17771/102724740-b0142480-42c6-11eb-8345-8b63c880553c.jpeg" width="600">
 
 ## Planned layout 
 
@@ -44,6 +46,8 @@ Finishing and Backing Options: 1/16" Non-Glare Acrylic with Foamcore Backing (SK
 Something like this to safely power the Pi and the LEDs w/ 5v using a 74AHCT125 level shifter. They say don't wire the lights directly off the Pi, so...
 
 <img src="https://cdn-learn.adafruit.com/assets/assets/000/064/121/medium640/led_strips_raspi_NeoPixel_Level_Shifted_bb.jpg?1540314807" width="400">
+
+<img src="https://user-images.githubusercontent.com/17771/102724741-b2767e80-42c6-11eb-9094-2df91cf82ddf.jpeg" width="600">
 
 ## Install
 
