@@ -1,104 +1,104 @@
 {
   "leds": {
-    "length": 24,
+    "length": 29,
     "brightness": 100
   },
   "airports": [
     {
         "station": "KHQM",
-        "light": 0
-    },
-    {
-        "station": "KSHN",
         "light": 1
     },
     {
-        "station": "KPWT",
-        "light": 2
-    },
-    {
-        "station": "KOLM",
+        "station": "KSHN",
         "light": 3
     },
     {
-        "station": "KGRF",
+        "station": "KOLM",
         "light": 4
     },
     {
-        "station": "KTIW",
+        "station": "KGRF",
         "light": 5
     },
     {
-        "station": "KTCM",
+        "station": "KPLU",
         "light": 6
     },
     {
-        "station": "KPLU",
+        "station": "KTCM",
         "light": 7
     },
     {
-        "station": "KSEA",
+        "station": "KTIW",
         "light": 8
     },
     {
-        "station": "KRNT",
+        "station": "KSEA",
         "light": 9
     },
     {
-        "station": "KBFI",
+        "station": "KRNT",
         "light": 10
     },
     {
-        "station": "KPAE",
+        "station": "KBFI",
         "light": 11
     },
     {
-        "station": "KAWO",
+        "station": "KPWT",
         "light": 12
     },
     {
-        "station": "KBVS",
-        "light": 13
-    },
-    {
-        "station": "KBLI",
+        "station": "KPAE",
         "light": 14
     },
     {
-        "station": "KORS",
+        "station": "KAWO",
         "light": 15
     },
     {
-        "station": "CYYJ",
+        "station": "KBVS",
         "light": 16
     },
     {
-        "station": "CYWH",
+        "station": "KBLI",
         "light": 17
     },
     {
-        "station": "KFHR",
+        "station": "KORS",
         "light": 18
     },
     {
-        "station": "KNUW",
+        "station": "CYYJ",
         "light": 19
     },
     {
-        "station": "K0S9",
+        "station": "KFHR",
         "light": 20
     },
     {
-        "station": "KCLM",
+        "station": "KNUW",
         "light": 21
     },
     {
-        "station": "KNOW",
+        "station": "K0S9",
         "light": 22
     },
     {
+        "station": "KNOW",
+        "light": 24
+    },
+    {
+        "station": "CYWH",
+        "light": 25
+    },
+    {
+        "station": "KCLM",
+        "light": 26
+    },
+    {
         "station": "KUIL",
-        "light": 23
+        "light": 29
     }
   ]
 }
