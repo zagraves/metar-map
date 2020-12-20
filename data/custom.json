@@ -1,7 +1,7 @@
 {
   "leds": {
     "length": 29,
-    "brightness": 150
+    "brightness": 100
   },
   "airports": [
     {
