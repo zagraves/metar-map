@@ -24,17 +24,17 @@ You can customize the airport data and it's respective LED light assignment in `
 Custom Frame (BLKSPR/PM918): $110.72*  (frame, acrylic, foam core, +shipping)
 Used VFR Sectional: $free
 Raspberry Pi Zero W: $10.00
-Zebra Zero case - Laser Lime GPIO: $6.95
+Zebra Zero case - Laser Lime (GPIO): $6.95
 Sandisk 16GB MicroSD card: $6.19
 ALITOVE WS2811 LED Pixels 50pc: $19.99
 Adafruit Quad Level-Shifter: $5.49
 Adafruit USB Micro-B Breakout Board [ADA1833]: $6.43
-100K Resistor: $free
-ElectroCookie Mini PCB Prototype Board (6 Pack, Multicolor): $9.99
+5-10K Resistor: $free
+ElectroCookie Mini PCB Prototype Board (6 Pack, Multicolor): $9.99 (1 needed)
 
 ### Custom frame 
 
-From pictureframes.com
+From `pictureframes.com`
 Frame: BLKSPR( 21 3/4" x 21 3/4" )
 Approximate Opening Size: 18” x 18”
 Borders: L=2", R=2, T=2", B=2"
