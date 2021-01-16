@@ -23,7 +23,7 @@
   "homepage": "https://github.com/zagraves/metar-map#readme",
   "dependencies": {
     "aewx-metar-parser": "^0.10.1",
-    "axios": "^0.21.0",
+    "axios": "^0.21.1",
     "chalk": "^4.1.0",
     "cheerio": "^1.0.0-rc.3",
     "commander": "^6.2.1",

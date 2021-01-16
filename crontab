@@ -1,2 +1,2 @@
-*/5 * * * *     sudo /home/pi/metar-map/start.sh 2>&1 | /usr/bin/logger -t metar
-0 3 * * sun     sudo /home/pi/metar-map/upgrade.sh 2>&1 | /usr/bin/logger -t metar
+*/5 * * * *     sudo /home/pi/metar-map/start.sh 2>&1 | /usr/bin/logger -t metarmap
+0 3 * * sun     sudo /home/pi/metar-map/upgrade.sh 2>&1 | /usr/bin/logger -t metarmap
