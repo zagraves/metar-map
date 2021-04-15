@@ -21,17 +21,17 @@ You can customize the airport data and it's respective LED light assignment in `
 
 ## Parts
 
-Custom Frame (BLKSPR/PM918): $110.72*  (frame, acrylic, foam core, +shipping)
-Used VFR Sectional: $free
-Raspberry Pi Zero W: $10.00
-Zebra Zero case - Laser Lime (GPIO): $6.95
-Sandisk 16GB MicroSD card: $6.19
-ALITOVE WS2811 LED Pixels 50pc: $19.99
-Adafruit Quad Level-Shifter: $5.49
-Adafruit USB Micro-B Breakout Board [ADA1833]: $6.43
-5k Resistor: $free
-220uF 25V capacitor: $free
-ElectroCookie Mini PCB Prototype Board (6 Pack, Multicolor): $9.99 (1 needed)
+* Custom Frame (BLKSPR/PM918): $110.72*  (frame, acrylic, foam core, +shipping)
+* Used VFR Sectional: $free
+* Raspberry Pi Zero W: $10.00
+* Zebra Zero case - Laser Lime (GPIO): $6.95
+* Sandisk 16GB MicroSD card: $6.19
+* ALITOVE WS2811 LED Pixels 50pc: $19.99
+* Adafruit Quad Level-Shifter: $5.49
+* Adafruit USB Micro-B Breakout Board [ADA1833]: $6.43
+* 5k Resistor: $free
+* 220uF 25V capacitor: $free
+* ElectroCookie Mini PCB Prototype Board (6 Pack, Multicolor): $9.99 (1 needed)
 
 ### Custom frame 
 
