@@ -1,5 +1,5 @@
 import config from 'config';
-import math from 'mathjs';
+import * as math from 'mathjs';
 import format from 'sprintf-js';
 
 // Categories are ordered in ascending priority. 
