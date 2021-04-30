@@ -1,6 +1,3 @@
-IMAGE=quay.io/zagraves/metar-map
-
-
 all: build
 
 build:
