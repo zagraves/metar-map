@@ -64,7 +64,7 @@ Install dependencies
 sudo apt-get install -y git jq
 ```
 
-Install nodejs
+Install NodeJS. We are using v11.15.0 for the ARMv6 architecture on the Pi Zero W in this case.
 
 ```
 wget https://nodejs.org/download/release/v11.15.0/node-v11.15.0-linux-armv6l.tar.gz
