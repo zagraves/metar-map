@@ -10,6 +10,6 @@ install:
 	sudo systemctl start metar.map.service
 
 update:
-	git pull origin master
+	git pull
 	sudo cp metar.map.service /etc/systemd/system/metar.map.service
 	sudo systemctl daemon-reload
