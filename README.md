@@ -61,10 +61,10 @@ sudo apt-get update && sudo apt-get upgrade
 Install dependencies
 
 ```bash
-sudo apt-get install -y git jq
+sudo apt-get install -y git jq nodejs
 ```
 
-Install nodejs
+Install nodejs (only for ARMv6)
 
 ```
 wget https://nodejs.org/download/release/v11.15.0/node-v11.15.0-linux-armv6l.tar.gz
