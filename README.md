@@ -23,15 +23,15 @@ You can customize the airport data and it's respective LED light assignment in `
 
 * Custom Frame (BLKSPR/PM918): $110.72*  (frame, acrylic, foam core, +shipping)
 * Used VFR Sectional: $free
-* Raspberry Pi Zero W: $10.00
-* Zebra Zero case - Laser Lime (GPIO): $6.95
+* Raspberry Pi 3B / 4B: ~$30.00+
+* C4Labs Zebra Case - True Blue (GPIO): $16.99
 * Sandisk 16GB MicroSD card: $6.19
 * ALITOVE WS2811 LED Pixels 50pc: $19.99
 * Adafruit Quad Level-Shifter: $5.49
 * Adafruit USB Micro-B Breakout Board [ADA1833]: $6.43
-* 5k Resistor: $free
-* 220uF 25V capacitor: $free
-* ElectroCookie Mini PCB Prototype Board (6 Pack, Multicolor): $9.99 (1 needed)
+* 5k Resistor
+* 220uF 25V capacitor
+* ElectroCookie Mini PCB Prototype Board (6 Pack, Multicolor): $9.99 (At least 1 needed)
 
 ### Custom frame 
 
@@ -41,6 +41,10 @@ Approximate Opening Size: 18” x 18”
 Borders: L=2", R=2, T=2", B=2"
 Mat: PM918 Very White Mat: PM918
 Finishing and Backing Options: 1/16" Non-Glare Acrylic with Foamcore Backing (SKU: NGF)
+
+### Pi Zer
+
+I don't recommend using the Raspberry Pi Zero. It's too slow - I had various issues with it being too slow to properly drive the WS2811 lights.
 
 ## Wiring
 
