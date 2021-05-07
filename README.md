@@ -42,7 +42,7 @@ Borders: L=2", R=2, T=2", B=2"
 Mat: PM918 Very White Mat: PM918
 Finishing and Backing Options: 1/16" Non-Glare Acrylic with Foamcore Backing (SKU: NGF)
 
-### Pi Zer
+### Pi Zero?
 
 I don't recommend using the Raspberry Pi Zero. It's too slow - I had various issues with it being too slow to properly drive the WS2811 lights.
 
