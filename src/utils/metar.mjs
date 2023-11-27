@@ -9,11 +9,7 @@ async function get(stations) {
   const codes = stations.map(it => it.toUpperCase());
   const url = format.sprintf(source.uri, codes);
 
-  // We'll scrape html, instead of using a more specific API. 
-  // This should allow swapping the source url/path in the config
-  // to anything else that might output raw METAR strings in the future.
   const response = await axios.get(url, { headers: source.headers });
-
   const metarLines = response.data.split("\n").filter(Boolean);
 
   return metarLines.map((metar) => {
