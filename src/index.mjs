@@ -29,7 +29,7 @@ function configure(handler) {
     const onError = (err) => {
       console.error(`${chalk.red(err.message)}`);
       console.error(err);
-      lights.setError(err, data)
+      lights.setError(err, data);
       process.exit(1);
     };
 
@@ -79,5 +79,6 @@ if (process.stdin.isTTY) {
 }
 
 process.on('uncaughtException', function(err) {
-  lights.setError(err, data)
+  console.error(err);
+  lights.setError(data)
 })
