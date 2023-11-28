@@ -29,7 +29,7 @@ function configure(handler) {
     const onError = (err) => {
       console.error(`${chalk.red(err.message)}`);
       console.error(err);
-      lights.setError(err, data);
+      lights.setError(data);
       process.exit(1);
     };
 
