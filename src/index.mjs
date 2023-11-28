@@ -9,6 +9,9 @@ import test from './commands/test';
 import station from './commands/station';
 import parse from './commands/parse';
 
+import lights from './services/lights';
+import data from '../data/custom.json';
+
 const Program = new Command.Command('metar-map')
   .version(packageJson.version, '-v, --version')
   .arguments('<command>')
@@ -73,3 +76,13 @@ if (process.stdin.isTTY) {
     Program.parse(process.argv); 
   });
 }
+
+process.on('uncaughtException', function(err) {
+  console.log(err)
+
+  const { length, ...options } = data.leds;
+  const sequence = new Array(length);
+
+  sequence.fill({ rgb: defaultColor }, 0);
+  lights.render(length, options)(sequence);
+})
