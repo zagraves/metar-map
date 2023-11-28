@@ -26,10 +26,10 @@ function configure(handler) {
     const command = { ...config, ...cmd, stdin };
     const handlerArgs = args.concat(command);
 
-    const onError = (err) => {
+    const onError = async (err) => {
       console.error(`${chalk.red(err.message)}`);
       console.error(err);
-      lights.setError(data);
+      await lights.setError(data);
       process.exit(1);
     };
 
@@ -80,5 +80,5 @@ if (process.stdin.isTTY) {
 
 process.on('uncaughtException', function(err) {
   console.error(err);
-  lights.setError(data)
+  lights.setError(data);
 })
