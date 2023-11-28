@@ -21,6 +21,8 @@ const Program = new Command.Command('metar-map')
 let stdin = '';
 
 function configure(handler) {
+  
+
   return async function commander(...args) {
     const cmd = args.pop();
     const command = { ...config, ...cmd, stdin };
@@ -29,7 +31,10 @@ function configure(handler) {
     const onError = async (err) => {
       console.error(`${chalk.red(err.message)}`);
       console.error(err);
-      await lights.setError(data);
+      
+      const { length, ...options } = data.leds;
+      await lights.setError(length, options)();
+      
       process.exit(1);
     };
 
