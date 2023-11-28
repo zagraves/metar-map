@@ -21,8 +21,6 @@ const Program = new Command.Command('metar-map')
 let stdin = '';
 
 function configure(handler) {
-  
-
   return async function commander(...args) {
     const cmd = args.pop();
     const command = { ...config, ...cmd, stdin };
