@@ -31,11 +31,11 @@ export function reset(length) {
 }
 
 export function setError(length, options) {
-  return async () = {
+  return async () {
     const sequence = new Array(length);
     sequence.fill({ rgb: [255, 255, 0] }, 0); // yellow
   
-    render(length, options)(sequence);
+    return render(length, options)(sequence);
   }
 }
 
