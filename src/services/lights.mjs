@@ -30,12 +30,13 @@ export function reset(length) {
   return () => ws281x.reset();
 }
 
-export function setError(data) {
-  const { length, ...options } = data.leds;
-  const sequence = new Array(length);
-  sequence.fill({ rgb: [255, 255, 0] }, 0); // yellow
+export function setError(length, options) {
+  return async () = {
+    const sequence = new Array(length);
+    sequence.fill({ rgb: [255, 255, 0] }, 0); // yellow
   
-  render(length, options)(sequence);
+    render(length, options)(sequence);
+  }
 }
 
 // ws281x.setBrightness
