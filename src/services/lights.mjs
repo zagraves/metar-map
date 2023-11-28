@@ -30,9 +30,7 @@ export function reset(length) {
   return () => ws281x.reset();
 }
 
-export function setError(err, data) {
-  console.error(err)
-  
+export function setError(data) {
   const { length, ...options } = data;
   const sequence = new Array(length);
   sequence.fill({ rgb: 16711680 }, 0);
