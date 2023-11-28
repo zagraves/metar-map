@@ -78,11 +78,5 @@ if (process.stdin.isTTY) {
 }
 
 process.on('uncaughtException', function(err) {
-  console.log(err)
-
-  const { length, ...options } = data.leds;
-  const sequence = new Array(length);
-
-  sequence.fill({ rgb: defaultColor }, 0);
-  lights.render(length, options)(sequence);
+  lights.setError(err, data)
 })
