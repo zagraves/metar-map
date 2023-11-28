@@ -31,7 +31,7 @@ export function reset(length) {
 }
 
 export function setError(data) {
-  const { length, ...options } = data;
+  const { length, ...options } = data.leds;
   const sequence = new Array(length);
   sequence.fill({ rgb: 16711680 }, 0);
   
