@@ -30,7 +30,6 @@
     "config": "^3.3.3",
     "debug": "^4.3.1",
     "mathjs": "^8.1.0",
-    "rpi-ws281x-native": "^0.10.2",
     "selectn": "^1.1.2",
     "sprintf-js": "^1.1.2"
   }

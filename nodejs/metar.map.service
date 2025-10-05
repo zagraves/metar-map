@@ -1,0 +1,12 @@
+[Unit]
+Description=metar-map
+Requires=network-online.target
+After=network-online.target
+
+[Service]
+WorkingDirectory=/home/pi/metar-map/nodejs
+ExecStart=/home/pi/metar-map/nodejs/start.sh 2>&1 | /usr/bin/logger -t metarmap
+ExecStop=/home/pi/metar-map/nodejs/stop.sh 2>&1 | /usr/bin/logger -t metarmap
+
+[Install]
+WantedBy=default.target
