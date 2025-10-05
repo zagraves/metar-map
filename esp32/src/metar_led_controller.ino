@@ -19,8 +19,8 @@
 // ============================================================================
 
 // WiFi credentials
-const char* WIFI_SSID = "Gravesnet";
-const char* WIFI_PASSWORD = "4258020698";
+const char* WIFI_SSID = "";
+const char* WIFI_PASSWORD = "";
 
 // LED configuration  
 #define NUM_LEDS 29        // Total number of LEDs in your strip
