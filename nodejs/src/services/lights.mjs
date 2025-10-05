@@ -1,9 +1,7 @@
 // import Promise from 'bluebird';
 import debug from 'debug';
-import ws281x from 'rpi-ws281x-native';
+import axios from 'axios';
 import { rgb, grb } from '../utils/rgb';
-
-// https://github.com/beyondscreen/node-rpi-ws281x-native
 
 export function render(length, options) {
   return async (colors) => {
@@ -19,8 +17,10 @@ export function render(length, options) {
 
     debug('metar:render')(`Rendering lights: [${pixels}]`)
 
-    ws281x.init(length, options);
-    ws281x.render(pixels);
+    return axios.post('http://metar-map.local/api/lights', {
+      clear: true,
+      leds: colors.slice(0, length).map(c => c.rgb)
+    });
   }
 }
 

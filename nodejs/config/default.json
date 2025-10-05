@@ -8,7 +8,7 @@
     "VV"
   ],
   "metar-source": {
-    "uri": "https://aviationweather.gov/cgi-bin/data/metar.php?ids=%1$s",
+    "uri": "https://aviationweather.gov/api/data/metar?ids=%1$s",
     "headers": {
       "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:83.0) Gecko/20100101 Firefox/83.0"
     }

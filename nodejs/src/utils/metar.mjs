@@ -10,11 +10,13 @@ async function get(stations) {
   const url = format.sprintf(source.uri, codes);
 
   const response = await axios.get(url, { headers: source.headers });
-  const metarLines = response.data.split("\n").filter(Boolean);
+  const metarLines = response.data.split('\n').filter(Boolean);
+
+  console.log(metarLines);
 
   return metarLines.map((metar) => {
-    const id = metar.split(' ')[0];
     const decoded = parse(metar);
+    const id = decoded.icao || metar.split(' ')[1];
 
     return {id, metar, decoded}
   });
