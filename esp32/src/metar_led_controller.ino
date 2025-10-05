@@ -13,29 +13,29 @@
 #include <FastLED.h>
 #include <ArduinoJson.h>
 #include <ESPmDNS.h>
+#include <SPIFFS.h>
+#include <StreamUtils.h>
 
 // ============================================================================
-// CONFIGURATION - Update these for your setup
+// CONFIGURATION - Loaded from config.ini file
 // ============================================================================
 
-// WiFi credentials
-const char* WIFI_SSID = "Gravesnet";
-const char* WIFI_PASSWORD = "4258020698";
-
-// LED configuration  
-#define NUM_LEDS 29        // Total number of LEDs in your strip
-#define LED_PIN 2          // GPIO pin connected to LED data line (change to GPIO2 if GPIO23 has issues)
-#define LED_BRIGHTNESS 90  // LED brightness (0-255)
+// Configuration variables (loaded from config.ini)
+String WIFI_SSID = "Gravesnet";           // Default fallback
+String WIFI_PASSWORD = "4258020698";      // Default fallback
+String MDNS_NAME = "metar-map";           // Default hostname
+int NUM_LEDS = 29;                        // Default LED count
+int LED_PIN = 2;                          // Default LED pin
+int LED_BRIGHTNESS = 90;                  // Default brightness
 
 // Network configuration
-#define MDNS_NAME "metar-map"  // Access via http://metar-map.local
 #define HTTP_PORT 80
 
 // ============================================================================
 // GLOBALS
 // ============================================================================
 
-CRGB leds[NUM_LEDS];
+CRGB* leds = nullptr;  // Will be allocated after config is loaded
 WebServer server(HTTP_PORT);
 
 // Status tracking
