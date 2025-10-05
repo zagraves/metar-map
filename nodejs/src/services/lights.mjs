@@ -17,17 +17,20 @@ export function render(length, options) {
 
     debug('metar:render')(`Rendering lights: [${pixels}]`)
 
-    return axios.post('http://metar-map.local/api/lights', {
+    return axios.post('http://metar-map.local/update', {
       clear: true,
-      leds: colors.slice(0, length).map(c => c.rgb)
+      leds: colors.slice(0, length).map((c, index) => ({
+        index: index,
+        color: c.rgb,
+      }))
     });
   }
 }
 
 export function reset(length) {
   debug('metar:lights')('Resetting lights...')
-  ws281x.init(length);
-  return () => ws281x.reset();
+  // ws281x.init(length);
+  // return () => ws281x.reset();
 }
 
 export function setError(length, options) {
@@ -38,7 +41,5 @@ export function setError(length, options) {
     return render(length, options)(sequence);
   }
 }
-
-// ws281x.setBrightness
 
 export default { render, reset, setError };

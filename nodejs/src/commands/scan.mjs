@@ -21,6 +21,7 @@ export default async function scan(command) {
     const metar = getMetar(airport.station);
 
     if (metar) {
+      console.log(metar)
       const icon = getIcon(metar);
       const rgb = getColor(metar);
       const metadata = { icon, name: airport.station };

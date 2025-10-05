@@ -19,12 +19,12 @@
 // ============================================================================
 
 // WiFi credentials
-const char* WIFI_SSID = "YOUR_WIFI_SSID";
-const char* WIFI_PASSWORD = "YOUR_WIFI_PASSWORD";
+const char* WIFI_SSID = "Gravesnet";
+const char* WIFI_PASSWORD = "4258020698";
 
 // LED configuration  
 #define NUM_LEDS 29        // Total number of LEDs in your strip
-#define LED_PIN 23         // GPIO pin connected to LED data line
+#define LED_PIN 2          // GPIO pin connected to LED data line (change to GPIO2 if GPIO23 has issues)
 #define LED_BRIGHTNESS 90  // LED brightness (0-255)
 
 // Network configuration
@@ -95,7 +95,7 @@ void setup() {
 
 void loop() {
   server.handleClient();
-  MDNS.update();
+  // MDNS.update(); // Not available in all ESP32 versions
   
   // Check WiFi connection
   if (WiFi.status() != WL_CONNECTED) {
@@ -305,12 +305,32 @@ void handleLEDUpdate() {
     return;
   }
   
-  DynamicJsonDocument doc(2048);
+  // Calculate required JSON buffer size dynamically
+  String jsonString = server.arg("plain");
+  size_t jsonSize = jsonString.length();
   
-  DeserializationError error = deserializeJson(doc, server.arg("plain"));
+  // Use larger buffer with safety margin (at least 4KB, up to 16KB for large payloads)
+  size_t bufferSize = max((size_t)4096, min((size_t)16384, jsonSize * 2));
+  
+  Serial.printf("📊 JSON size: %d bytes, buffer: %d bytes, free heap: %d\n", 
+                jsonSize, bufferSize, ESP.getFreeHeap());
+  
+  // Check if we have enough free memory
+  if (ESP.getFreeHeap() < bufferSize + 8192) {  // Keep 8KB safety margin
+    httpErrorsTotal++;
+    Serial.printf("❌ Insufficient memory for JSON parsing. Need: %d, Available: %d\n", 
+                  bufferSize + 8192, ESP.getFreeHeap());
+    server.send(507, "application/json", "{\"error\":\"Insufficient memory\"}");
+    return;
+  }
+  
+  DynamicJsonDocument doc(bufferSize);
+  
+  DeserializationError error = deserializeJson(doc, jsonString);
   if (error) {
     httpErrorsTotal++;
-    Serial.printf("❌ JSON parse error: %s\n", error.c_str());
+    Serial.printf("❌ JSON parse error: %s (size: %d, buffer: %d)\n", 
+                  error.c_str(), jsonSize, bufferSize);
     server.send(400, "application/json", "{\"error\":\"Invalid JSON\"}");
     return;
   }
@@ -335,7 +355,10 @@ void handleLEDUpdate() {
       updateCount++;
       
       // Count LEDs that are actually lit (not black)
-      if (color[0] > 0 || color[1] > 0 || color[2] > 0) {
+      int r = color[0].as<int>();
+      int g = color[1].as<int>();
+      int b = color[2].as<int>();
+      if (r > 0 || g > 0 || b > 0) {
         currentLedsUsed++;
       }
     }
@@ -394,76 +417,40 @@ void handleStatus() {
 void handleRoot() {
   httpRequestsTotal++;
   
-  String html = R"(
-<!DOCTYPE html>
-<html>
-<head>
-    <title>METAR Map LED Controller</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        body { font-family: Arial, sans-serif; margin: 20px; background: #f0f0f0; }
-        .container { max-width: 600px; margin: 0 auto; background: white; padding: 20px; border-radius: 10px; }
-        .status { background: #e8f5e8; padding: 15px; border-radius: 5px; margin: 10px 0; }
-        .button { background: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 5px; margin: 5px; cursor: pointer; }
-        .button:hover { background: #0056b3; }
-        .info { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 10px 0; }
-        .info div { background: #f8f9fa; padding: 10px; border-radius: 5px; }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>🗺️ METAR Map LED Controller</h1>
-        <div class="status">
-            <h3>✅ Controller Online</h3>
-            <p>Ready to receive LED commands from Raspberry Pi</p>
-        </div>
-        
-        <div class="info">
-            <div><strong>LEDs:</strong> )" + String(NUM_LEDS) + R"(</div>
-            <div><strong>Pin:</strong> GPIO)" + String(LED_PIN) + R"(</div>
-            <div><strong>Brightness:</strong> )" + String(LED_BRIGHTNESS) + R"(</div>
-            <div><strong>IP:</strong> )" + WiFi.localIP().toString() + R"(</div>
-        </div>
-        
-        <h3>Test Controls</h3>
-        <button class="button" onclick="testLEDs()">🌈 Test LEDs</button>
-        <button class="button" onclick="clearLEDs()">⚫ Clear LEDs</button>
-        <button class="button" onclick="getStatus()">📊 Get Status</button>
-        <button class="button" onclick="getMetrics()">📈 View Metrics</button>
-        
-        <h3>API</h3>
-        <p><strong>POST /update</strong> - Update LED colors</p>
-        <p><strong>GET /status</strong> - Get controller status</p>
-        <p><strong>GET /metrics</strong> - Prometheus metrics</p>
-        <p><strong>GET /test</strong> - Run LED test pattern</p>
-    </div>
-    
-    <script>
-        function testLEDs() {
-            fetch('/test').then(r => r.text()).then(console.log);
-        }
-        
-        function clearLEDs() {
-            fetch('/update', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({clear: true, leds: []})
-            }).then(r => r.json()).then(console.log);
-        }
-        
-        function getStatus() {
-            fetch('/status').then(r => r.json()).then(data => {
-                alert(JSON.stringify(data, null, 2));
-            });
-        }
-        
-        function getMetrics() {
-            window.open('/metrics', '_blank');
-        }
-    </script>
-</body>
-</html>
-  )";
+  String html = "<!DOCTYPE html><html><head><title>METAR Map LED Controller</title>";
+  html += "<meta name='viewport' content='width=device-width, initial-scale=1'>";
+  html += "<style>body { font-family: Arial, sans-serif; margin: 20px; background: #f0f0f0; }";
+  html += ".container { max-width: 600px; margin: 0 auto; background: white; padding: 20px; border-radius: 10px; }";
+  html += ".status { background: #e8f5e8; padding: 15px; border-radius: 5px; margin: 10px 0; }";
+  html += ".button { background: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 5px; margin: 5px; cursor: pointer; }";
+  html += ".button:hover { background: #0056b3; }";
+  html += ".info { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 10px 0; }";
+  html += ".info div { background: #f8f9fa; padding: 10px; border-radius: 5px; }";
+  html += "</style></head><body><div class='container'>";
+  html += "<h1>🗺️ METAR Map LED Controller</h1>";
+  html += "<div class='status'><h3>✅ Controller Online</h3>";
+  html += "<p>Ready to receive LED commands from Raspberry Pi</p></div>";
+  html += "<div class='info'>";
+  html += "<div><strong>LEDs:</strong> " + String(NUM_LEDS) + "</div>";
+  html += "<div><strong>Pin:</strong> GPIO" + String(LED_PIN) + "</div>";
+  html += "<div><strong>Brightness:</strong> " + String(LED_BRIGHTNESS) + "</div>";
+  html += "<div><strong>IP:</strong> " + WiFi.localIP().toString() + "</div>";
+  html += "</div><h3>Test Controls</h3>";
+  html += "<button class='button' onclick='testLEDs()'>🌈 Test LEDs</button>";
+  html += "<button class='button' onclick='clearLEDs()'>⚫ Clear LEDs</button>";
+  html += "<button class='button' onclick='getStatus()'>📊 Get Status</button>";
+  html += "<button class='button' onclick='getMetrics()'>📈 View Metrics</button>";
+  html += "<h3>API</h3>";
+  html += "<p><strong>POST /update</strong> - Update LED colors</p>";
+  html += "<p><strong>GET /status</strong> - Get controller status</p>";
+  html += "<p><strong>GET /metrics</strong> - Prometheus metrics</p>";
+  html += "<p><strong>GET /test</strong> - Run LED test pattern</p>";
+  html += "</div><script>";
+  html += "function testLEDs() { fetch('/test').then(r => r.text()).then(console.log); }";
+  html += "function clearLEDs() { fetch('/update', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({clear: true, leds: []}) }).then(r => r.json()).then(console.log); }";
+  html += "function getStatus() { fetch('/status').then(r => r.json()).then(data => { alert(JSON.stringify(data, null, 2)); }); }";
+  html += "function getMetrics() { window.open('/metrics', '_blank'); }";
+  html += "</script></body></html>";
   
   server.send(200, "text/html", html);
 }
