@@ -14,7 +14,6 @@
 #include <ArduinoJson.h>
 #include <ESPmDNS.h>
 #include <SPIFFS.h>
-#include <StreamUtils.h>
 
 // ============================================================================
 // CONFIGURATION - Loaded from config.ini file
@@ -25,9 +24,13 @@ String WIFI_SSID = "";           // Default fallback
 String WIFI_PASSWORD = "";      // Default fallback
 String MDNS_NAME = "metar-map";           // Default hostname
 
-int NUM_LEDS = 29;                        // Default LED count
-int LED_PIN = 2;                          // Default LED pin
-int LED_BRIGHTNESS = 90;                  // Default brightness
+// LED configuration - using compile-time constants for FastLED templates
+#define MAX_LEDS 50                       // Maximum supported LEDs
+#define DEFAULT_LED_PIN 2                 // Default LED pin
+
+int NUM_LEDS = 29;                        // Actual LED count (loaded from config)
+int LED_PIN = DEFAULT_LED_PIN;            // Actual LED pin (loaded from config)
+int LED_BRIGHTNESS = 90;                  // LED brightness (loaded from config)
 
 // Network configuration
 #define HTTP_PORT 80
@@ -36,7 +39,7 @@ int LED_BRIGHTNESS = 90;                  // Default brightness
 // GLOBALS
 // ============================================================================
 
-CRGB* leds = nullptr;  // Will be allocated after config is loaded
+CRGB leds[MAX_LEDS];  // Static array for FastLED template compatibility
 WebServer server(HTTP_PORT);
 
 // Status tracking
@@ -140,9 +143,6 @@ void setup() {
   // Load configuration from config.ini
   loadConfiguration();
   
-  // Allocate LED array after config is loaded
-  leds = new CRGB[NUM_LEDS];
-  
   // Initialize LEDs
   setupLEDs();
   
@@ -201,12 +201,13 @@ void loop() {
 // ============================================================================
 
 void setupLEDs() {
-  FastLED.addLeds<WS2811, LED_PIN, RGB>(leds, NUM_LEDS);
+  // Initialize FastLED with compile-time constants, then limit to actual count
+  FastLED.addLeds<WS2811, DEFAULT_LED_PIN, RGB>(leds, MAX_LEDS);
   FastLED.setBrightness(LED_BRIGHTNESS);
   FastLED.clear();
   FastLED.show();
   
-  Serial.printf("💡 FastLED initialized: %d LEDs on GPIO%d\n", NUM_LEDS, LED_PIN);
+  Serial.printf("💡 FastLED initialized: %d LEDs on GPIO%d (max %d)\n", NUM_LEDS, LED_PIN, MAX_LEDS);
   
   // Test pattern on startup
   showStartupPattern();
