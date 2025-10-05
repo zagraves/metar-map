@@ -21,9 +21,10 @@
 // ============================================================================
 
 // Configuration variables (loaded from config.ini)
-String WIFI_SSID = "Gravesnet";           // Default fallback
-String WIFI_PASSWORD = "4258020698";      // Default fallback
+String WIFI_SSID = "";           // Default fallback
+String WIFI_PASSWORD = "";      // Default fallback
 String MDNS_NAME = "metar-map";           // Default hostname
+
 int NUM_LEDS = 29;                        // Default LED count
 int LED_PIN = 2;                          // Default LED pin
 int LED_BRIGHTNESS = 90;                  // Default brightness
@@ -56,6 +57,76 @@ unsigned long testRequests = 0;
 unsigned long startTime = 0;
 
 // ============================================================================
+// CONFIGURATION LOADING
+// ============================================================================
+
+void loadConfiguration() {
+  Serial.println("📄 Loading configuration from config.ini...");
+  
+  if (!SPIFFS.begin(true)) {
+    Serial.println("❌ Failed to mount SPIFFS filesystem");
+    Serial.println("⚠️  Using default configuration");
+    return;
+  }
+  
+  if (!SPIFFS.exists("/config.ini")) {
+    Serial.println("⚠️  config.ini not found, using defaults");
+    Serial.println("💡 Copy config.template.ini to config.ini and customize");
+    return;
+  }
+  
+  File configFile = SPIFFS.open("/config.ini", "r");
+  if (!configFile) {
+    Serial.println("❌ Failed to open config.ini");
+    return;
+  }
+  
+  String currentSection = "";
+  while (configFile.available()) {
+    String line = configFile.readStringUntil('\n');
+    line.trim();
+    
+    // Skip empty lines and comments
+    if (line.length() == 0 || line.startsWith("#")) continue;
+    
+    // Check for section headers
+    if (line.startsWith("[") && line.endsWith("]")) {
+      currentSection = line.substring(1, line.length() - 1);
+      continue;
+    }
+    
+    // Parse key=value pairs
+    int equalPos = line.indexOf('=');
+    if (equalPos > 0) {
+      String key = line.substring(0, equalPos);
+      String value = line.substring(equalPos + 1);
+      key.trim();
+      value.trim();
+      
+      if (currentSection == "wifi") {
+        if (key == "ssid") WIFI_SSID = value;
+        else if (key == "password") WIFI_PASSWORD = value;
+      }
+      else if (currentSection == "device") {
+        if (key == "hostname") MDNS_NAME = value;
+        else if (key == "led_count") NUM_LEDS = value.toInt();
+        else if (key == "led_pin") LED_PIN = value.toInt();
+        else if (key == "led_brightness") LED_BRIGHTNESS = value.toInt();
+      }
+    }
+  }
+  
+  configFile.close();
+  
+  Serial.println("✅ Configuration loaded:");
+  Serial.printf("   WiFi SSID: %s\n", WIFI_SSID.c_str());
+  Serial.printf("   Hostname: %s\n", MDNS_NAME.c_str());
+  Serial.printf("   LED Count: %d\n", NUM_LEDS);
+  Serial.printf("   LED Pin: %d\n", LED_PIN);
+  Serial.printf("   LED Brightness: %d\n", LED_BRIGHTNESS);
+}
+
+// ============================================================================
 // SETUP
 // ============================================================================
 
@@ -65,6 +136,12 @@ void setup() {
   
   // Initialize metrics start time
   startTime = millis();
+  
+  // Load configuration from config.ini
+  loadConfiguration();
+  
+  // Allocate LED array after config is loaded
+  leds = new CRGB[NUM_LEDS];
   
   // Initialize LEDs
   setupLEDs();
@@ -76,13 +153,13 @@ void setup() {
   setupWebServer();
   
   // Setup mDNS
-  if (MDNS.begin(MDNS_NAME)) {
-    Serial.printf("📍 mDNS responder started: http://%s.local\n", MDNS_NAME);
+  if (MDNS.begin(MDNS_NAME.c_str())) {
+    Serial.printf("📍 mDNS responder started: http://%s.local\n", MDNS_NAME.c_str());
   }
   
   Serial.println("✅ LED Controller Ready!");
   Serial.printf("📡 IP Address: %s\n", WiFi.localIP().toString().c_str());
-  Serial.printf("🌐 Web Interface: http://%s.local\n", MDNS_NAME);
+  Serial.printf("🌐 Web Interface: http://%s.local\n", MDNS_NAME.c_str());
   Serial.printf("💡 LED Count: %d\n", NUM_LEDS);
   
   // Show ready pattern
@@ -240,10 +317,10 @@ void showErrorPattern() {
 // ============================================================================
 
 void setupWiFi() {
-  Serial.printf("📶 Connecting to WiFi: %s", WIFI_SSID);
+  Serial.printf("📶 Connecting to WiFi: %s", WIFI_SSID.c_str());
   
   WiFi.mode(WIFI_STA);
-  WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+  WiFi.begin(WIFI_SSID.c_str(), WIFI_PASSWORD.c_str());
   
   int attempts = 0;
   while (WiFi.status() != WL_CONNECTED && attempts < 30) {
