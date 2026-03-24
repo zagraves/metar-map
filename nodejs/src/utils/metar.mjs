@@ -23,7 +23,7 @@ async function get(stations) {
 }
 
 export function parse(metar) {
-  return parser(metar);
+  return parser(metar.replace(/^(METAR|SPECI)\s+/, ''));
 }
 
 export default { get, parse };
